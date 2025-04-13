@@ -34,14 +34,14 @@ const CardLineChart = () => {
             label: new Date().getFullYear(),
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
-            data: [65, 78, 66, 44, 56, 67, 75],
+            data: [65, 78, 66, 44, 56, 67, 75,95],
             fill: false,
           },
           {
             label: new Date().getFullYear() - 1,
             backgroundColor: "#fff",
             borderColor: "#fff",
-            data: [40, 68, 86, 74, 56, 60, 87],
+            data: [40, 68, 86, 74, 56, 60, 87,95],
             fill: false,
           },
         ],
@@ -51,6 +51,7 @@ const CardLineChart = () => {
         maintainAspectRatio: false,
         plugins: {
           legend: {
+            align: "end",
             position: "bottom",
             labels: {
               color: "white",
