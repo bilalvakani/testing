@@ -38,7 +38,7 @@ const CardLineChart = () => {
             fill: false,
           },
           {
-            label:,
+            label: "Dr.osama",
             backgroundColor: "#fff",
             borderColor: "#fff",
             data: [40, 68, 86, 74, 56, 60, 87,95],
