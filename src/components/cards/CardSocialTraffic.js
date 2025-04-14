@@ -1,3 +1,4 @@
+
 import React from "react";
 
 // components
@@ -5,10 +6,10 @@ import React from "react";
 export default function CardSocialTraffic() {
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-        <div className="rounded-t mb-0 px-4 py-3 border-0">
+      <div className="relative flex flex-col mb-6 break-words bg-white w-full shadow-lg rounded">
+        <div className="rounded-t mb-0 px-4 py-2 border-0">
           <div className="flex flex-wrap items-center">
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+            <div className="relative w-full px-2 max-w-full flex-grow flex-1">
               <h3 className="font-semibold text-base text-blueGray-700">
                 Social traffic
               </h3>
@@ -23,126 +24,51 @@ export default function CardSocialTraffic() {
             </div>
           </div>
         </div>
-        <div className="block w-full">
-          {/* Projects table */}
-          <table className="min-w-max items-center w-full bg-transparent border-collapse">
-            <thead className="thead-light">
+        <div className="block w-full  rounded-b overflow-hidden">
+        <table className="min-w-full bg-transparent border-collapse table-auto">
+        <thead className="thead-light">
               <tr>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-5 py-3 text-xs uppercase font-semibold text-left text-blueGray-500 border-b border-blueGray-200 bg-blueGray-50">
                   Referral
                 </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                <th className="px-5 py-3 text-xs uppercase font-semibold text-left text-blueGray-500 border-b border-blueGray-200 bg-blueGray-50">
                   Visitors
                 </th>
-                <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
+                <th className="px-5 py-3 text-xs uppercase font-semibold text-left text-blueGray-500 border-b border-blueGray-200 bg-blueGray-50 min-w-140-px">
+                  Percentage
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Facebook
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  1,480
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">60%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                        <div
-                          style={{ width: "60%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
-                        ></div>
+              {[
+                { name: "Facebook", visitors: "1,480", percent: "60%", color: "bg-red-500", bg: "bg-red-200", width: "60%" },
+                { name: "Facebook", visitors: "5,480", percent: "70%", color: "bg-emerald-500", bg: "bg-emerald-200", width: "70%" },
+                { name: "Google", visitors: "4,807", percent: "80%", color: "bg-purple-500", bg: "bg-purple-200", width: "80%" },
+                { name: "Instagram", visitors: "3,678", percent: "75%", color: "bg-sky-500", bg: "bg-sky-200", width: "75%" },
+                { name: "Twitter", visitors: "2,645", percent: "30%", color: "bg-orange-500", bg: "bg-orange-200", width: "30%" },
+              ].map((item, index) => (
+                <tr key={index}>
+                  <th className="px-6 py-4 text-xs text-left align-middle whitespace-nowrap font-normal text-blueGray-700 border-b border-blueGray-100">
+                    {item.name}
+                  </th>
+                  <td className="px-6 py-4 text-xs align-middle whitespace-nowrap border-b border-blueGray-100">
+                    {item.visitors}
+                  </td>
+                  <td className="px-6 py-4 text-xs align-middle whitespace-nowrap border-b border-blueGray-100">
+                    <div className="flex items-center">
+                      <span className="mr-2">{item.percent}</span>
+                      <div className="relative w-full">
+                        <div className={`overflow-hidden h-2 text-xs flex rounded ${item.bg}`}>
+                          <div
+                            style={{ width: item.width }}
+                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${item.color}`}
+                          ></div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Facebook
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  5,480
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">70%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-emerald-200">
-                        <div
-                          style={{ width: "70%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Google
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  4,807
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">80%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-purple-200">
-                        <div
-                          style={{ width: "80%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  Instagram
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  3,678
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">75%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-lightBlue-200">
-                        <div
-                          style={{ width: "75%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lightBlue-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  twitter
-                </th>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2,645
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  <div className="flex items-center">
-                    <span className="mr-2">30%</span>
-                    <div className="relative w-full">
-                      <div className="overflow-hidden h-2 text-xs flex rounded bg-orange-200">
-                        <div
-                          style={{ width: "30%" }}
-                          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
