@@ -391,7 +391,6 @@ const CardLineChart = () => {
       <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
         <div className="flex flex-wrap items-center justify-between">
           <div className="text-white">
-            <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">Overview</h6>
             <h2 className="text-white text-xl font-semibold">Income</h2>
           </div>
         </div>
