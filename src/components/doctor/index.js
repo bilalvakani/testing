@@ -3,6 +3,8 @@ import React from "react";
 import { useState } from "react";
 import { Search } from "lucide-react";
 import AddDoctor from "./addDoctor";
+import { Trash2 , Pencil } from 'lucide-react';
+import Pagination from "../pagination";
 
 // Sample doctor data
 const initialDoctors = [
@@ -84,25 +86,8 @@ export default function Doctor() {
     email: "",
   });
 
-  // Pagination settings
   const itemsPerPage = 5;
   const totalPages = Math.ceil(doctors.length / itemsPerPage);
-
-  // Handle form input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewDoctor({ ...newDoctor, [name]: value });
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newId =
-      doctors.length > 0 ? Math.max(...doctors.map((doc) => doc.id)) + 1 : 1;
-    setDoctors([...doctors, { id: newId, ...newDoctor }]);
-    setNewDoctor({ name: "", specialization: "", contact: "", email: "" });
-    setShowForm(false);
-  };
 
   // Filter doctors based on search term
   const filteredDoctors = doctors.filter(
@@ -159,6 +144,9 @@ export default function Doctor() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Clinic
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -183,6 +171,10 @@ export default function Doctor() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {doctor.clinic}
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex gap-2">
+                      <Trash2 size={18} className="text-red-400"/>
+                      <Pencil size={18} className="text-yellow-400"/>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -199,75 +191,7 @@ export default function Doctor() {
           </table>
         </div>
       </div>
-      {filteredDoctors.length > itemsPerPage && (
-        <div className="flex justify-center mt-4">
-          <nav className="inline-flex rounded-md shadow">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium ${
-                currentPage === 1
-                  ? "text-gray-300 cursor-not-allowed"
-                  : "text-gray-500 hover:bg-gray-50 cursor-pointer"
-              }`}
-            >
-              <span className="sr-only">Previous</span>
-              <svg
-                className="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium ${
-                  currentPage === page
-                    ? "z-10 bg-blue-50 border-blue-500 text-blue-600"
-                    : "text-gray-500 hover:bg-gray-50"
-                }`}
-              >
-                {page}
-              </button>
-            ))}
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium ${
-                currentPage === totalPages
-                  ? "text-gray-300 cursor-not-allowed"
-                  : "text-gray-500 hover:bg-gray-50 cursor-pointer"
-              }`}
-            >
-              <span className="sr-only">Next</span>
-              <svg
-                className="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </button>
-          </nav>
-        </div>
-      )}
+      {/* <Pagination data={filteredDoctors} itemsPerPage={itemsPerPage}/> */}
     </div>
   );
 }
