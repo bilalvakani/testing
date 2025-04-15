@@ -69,7 +69,7 @@ export default function Sidebar() {
               </li>
 
               <li className="items-center">
-                <Link href="/entities" className="text-xs text-neutral-800 uppercase py-3 font-semibold flex gap-3 items-center">
+                <Link href="/dashboard/entities" className="text-xs text-neutral-800 uppercase py-3 font-semibold flex gap-3 items-center">
                     <Boxes size={20}/>
                     Entities
                 </Link>
