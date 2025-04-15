@@ -1,12 +1,14 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu,X,LayoutDashboard,Wrench,Boxes,LogOut } from 'lucide-react';
+import { Menu, X, LayoutDashboard, Wrench, Boxes, LogOut } from "lucide-react";
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.js";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
+  const pathname = usePathname();
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
   return (
@@ -18,9 +20,12 @@ export default function Sidebar() {
             type="button"
             onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
           >
-            <Menu className=""/>
+            <Menu className="" />
           </button>
-          <Link href="/" className="md:block text-left md:pb-2 text-gray-600 mr-0 inline-block whitespace-nowrap text-2xl uppercase font-bold px-0">
+          <Link
+            href="/"
+            className="md:block text-left md:pb-2 text-gray-600 mr-0 inline-block whitespace-nowrap text-2xl uppercase font-bold px-0"
+          >
             AL-TABIB
           </Link>
           <ul className="md:hidden items-center flex flex-wrap list-none">
@@ -29,14 +34,16 @@ export default function Sidebar() {
             </li>
           </ul>
           <div
-            className={`md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-1 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ${collapseShow}`
-            }
+            className={`md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-1 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ${collapseShow}`}
           >
             <div className="md:min-w-full md:hidden block">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  <Link href="/" className="md:block text-left md:pb-2 text-gray-600 mr-0 inline-block whitespace-nowrap text-xl uppercase font-bold px-0">
-                      AL-TABIB
+                  <Link
+                    href="/"
+                    className="md:block text-left md:pb-2 text-gray-600 mr-0 inline-block whitespace-nowrap text-xl uppercase font-bold px-0"
+                  >
+                    AL-TABIB
                   </Link>
                 </div>
                 <div className="w-6/12 flex justify-end">
@@ -62,23 +69,54 @@ export default function Sidebar() {
             <hr className="md:none my-4 md:my-0 md:min-w-full" />
             <ul className="md:flex-col md:min-w-full flex flex-col list-none mt-2">
               <li className="items-center">
-                <Link href="/dashboard" className="text-xs text-neutral-800 uppercase py-3 font-semibold flex gap-3 items-center">
-                    <LayoutDashboard size={20}/>
-                    Dashboard
+                <Link
+                  href="/dashboard"
+                  className={`text-xs uppercase py-3 font-semibold flex gap-3 items-center ${
+                    pathname === "/dashboard"
+                      ? "text-blue-500"
+                      : "text-neutral-800"
+                  }`}
+                >
+                  <LayoutDashboard
+                    size={20}
+                    className={pathname === "/dashboard" ? "text-blue-500" : ""}
+                  />
+                  Dashboard
                 </Link>
               </li>
 
               <li className="items-center">
-                <Link href="/dashboard/entities" className="text-xs text-neutral-800 uppercase py-3 font-semibold flex gap-3 items-center">
-                    <Boxes size={20}/>
-                    Entities
+                <Link
+                  href="/dashboard/entities"
+                  className={`text-xs uppercase py-3 font-semibold flex gap-3 items-center ${
+                    pathname === "/dashboard/entities"
+                      ? "text-blue-500"
+                      : "text-neutral-800"
+                  }`}
+                >
+                  <Boxes
+                    size={20}
+                    className={
+                      pathname === "/dashboard/entities" ? "text-blue-500" : ""
+                    }
+                  />
+                  Entities
                 </Link>
               </li>
 
               <li className="items-center">
-                <Link href="/settings" className="text-xs text-neutral-800 uppercase py-3 font-semibold flex gap-3 items-center" >
-                    <Wrench size={20} />
-                    Settings
+                <Link
+                  href="/settings"
+                  className={`text-xs uppercase py-3 font-semibold flex gap-3 items-center ${
+                    pathname === "/dashboard/settings"
+                      ? "text-blue-500"
+                      : "text-neutral-800"
+                  }`}                >
+                  <Wrench   size={20}
+                    className={
+                      pathname === "/dashboard/settings" ? "text-blue-500" : ""
+                    } />
+                  Settings
                 </Link>
               </li>
 
