@@ -18,3 +18,52 @@ export const clinicFields = [
     name: "cliniclocation",
   },
 ];
+
+export const doctorFields = [
+  {
+    label: "Doctor Name",
+    input: "Enter Doctor Name",
+    type: "text",
+    name: "doctorName",
+  },
+  {
+    label: "Age",
+    input: "Enter your Age",
+    type: "number",
+    name: "age",
+  },
+  {
+    type: "select",
+    name: "gender", 
+    placeholder: "Enter your Gender",
+    require: true,
+    options: [
+      { label: "Male", value: "male" },
+      { label: "Female", value: "female" },
+    ],
+  },
+  {
+    label: "Clinic Name",
+    input: "Enter Clinic Name",
+    type: "text",
+    name: "clinicName",
+  },
+  {
+    label: "Contact Number",
+    input: "Enter Contact Number",
+    type: "text",
+    name: "contactNumber",
+  },
+  {
+    label: "Specialization",
+    input: "Enter Specialization",
+    type: "text",
+    name: "specialization",
+  },
+  {
+    label: "Qualification",
+    input: "Enter Qualification",
+    type: "text",
+    name: "qualification",
+  },
+];

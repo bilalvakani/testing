@@ -18,3 +18,27 @@ export const addClinicSchema = z.object({
     string().
     min(1, "Clinic Location is required"),
 });
+
+export const addDoctorSchema = z.object({
+  doctorName: z
+    .string()
+    .min(1, "Doctor Name is required"),
+  age: z
+    .string()
+    .min(1, "Age is required"),
+  gender: z
+    .string()
+    .min(1, "Gender is required"),
+  clinicName: z
+    .string()
+    .min(1, "Clinic Name is required"),
+  contactNumber: z
+    .string()
+    .min(1, "Contact Number is required"),
+  specialization: z
+    .string()
+    .min(1, "Specialization is required"),
+  qualification: z
+    .string()
+    .min(1, "Qualification is required"),
+});

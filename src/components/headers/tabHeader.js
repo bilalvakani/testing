@@ -1,6 +1,6 @@
 import React from "react";
 
-const TabHeader = ({showForm,setShowForm,title,buttonText}) => {
+const   TabHeader = ({showForm,setShowForm,title,buttonText}) => {
   return (
     <>
       <div className="flex justify-between items-center mt-2">
