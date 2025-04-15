@@ -7,7 +7,7 @@ const ChildrenBody = ({children}) => {
   return (
     <>
       <Sidebar />
-      <div className="relative md:ml-56">
+      <div className="relative md:ml-56 bg-gray-100">
         <AdminNavbar />
         <HeaderStats />
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
