@@ -9,11 +9,7 @@ export const doctorColumns = [
     dataIndex: "name",
     sorter: (a, b) => a.name.length - b.name.length,
   },
-  {
-    title: "Age",
-    dataIndex: "age",
-    sorter: (a, b) => a.age - b.age,
-  },
+ 
   {
     title: "Gender",
     dataIndex: "gender",
@@ -37,6 +33,32 @@ export const doctorColumns = [
     dataIndex: "qualification",
   },
 ];
+export const patientColumns = (onLocationClick) => [
+  {
+    title: "ID",
+    dataIndex: "id",
+  },
+  {
+    title: "User Name",
+    dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
+  },
+  {
+    title: "DOB",
+    dataIndex: "DOB",
+    sorter: (a, b) => a.age - b.age,
+  },
+  {
+    title: "Gender",
+    dataIndex: "gender",
+    sorter: (a, b) => a.gender.length - b.gender.length,
+  },
+  {
+    title: "Contact",
+    dataIndex: "contact",
+  },
+];
+
 
 export const clinicColumns = (onLocationClick) => [
   {
@@ -186,5 +208,40 @@ export const clinicData = [
     name: "Dental Vision 2000",
     address: "Shahrae Faisal",
     latlong: "24.88698500524078,67.14920279786963",
+  },
+];
+
+export const patientData = [
+  {
+    id: 1,
+    name: "Ahmed raza",
+    DOB: "2015-04-11",
+    gender: "Male",
+    contact: "03192094098",
+
+  },
+  {
+    id: 2,
+    name: "Raza",
+    DOB: "2015-04-11",
+    gender: "Male",
+    contact: "03192094098",
+
+  },
+  {
+    id: 3,
+    name: "Basit",
+    DOB: "1959-04-11",
+    gender: "Male",
+    contact: "03192094098",
+
+  },
+  {
+    id: 4,
+    name: "Khadija",
+    DOB: "1959-04-11",
+    gender: "Male",
+    contact: "03192094098",
+
   },
 ];
