@@ -1,15 +1,15 @@
 import React from "react";
 
-const AddDoctor = ({showForm,setShowForm}) => {
+const TabHeader = ({showForm,setShowForm,title,buttonText}) => {
   return (
     <>
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-white">Doctor Management</h1>
+      <div className="flex justify-between items-center mt-2">
+        <h1 className="text-2xl !font-bold text-neutral-800 !mb-0">{title}</h1>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-gray-600 text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
+          className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
         >
-          {showForm ? "Cancel" : "Add Doctor"}
+          {showForm ? "Cancel" : buttonText}
         </button>
       </div>
       {showForm && (
@@ -101,4 +101,4 @@ const AddDoctor = ({showForm,setShowForm}) => {
   );
 };
 
-export default AddDoctor;
+export default TabHeader;

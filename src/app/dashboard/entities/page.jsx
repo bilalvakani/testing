@@ -3,6 +3,7 @@ import AdminNavbar from "@/components/navbars/adminNavbar";
 import TabContent from "@/components/tabs";
 import React, { useState } from "react";
 import bgImage from "@/assets/img/bgImage.jpg";
+import CardLineChart from "@/components/cards/CardLineChart";
 
 const Entities = () => {
   const [activeTab, setActiveTab] = useState("doctor");
@@ -16,28 +17,35 @@ const Entities = () => {
   ];
   return (
     <>
-      <div className="relative md:ml-56 bg-[#0066a1] min-h-screen">
-        <AdminNavbar title="Entities" />
-        <div className="relative bg-blueGray-800 md:pt-24 pt-12">
-          <div className="px-4 md:px-6 mx-auto w-full">
-            <div className="flex flex-wrap">
-              {tabs.map((tab, index) => (
-                <button
-                  key={tab.id}
-                  className={`px-6 py-3 font-medium text-md transition-colors 
-                    ${
+      <div className="flex flex-wrap">
+        <div className="w-full xl:mb-0 px-4 ">
+          <div className="relative flex flex-wrap w-full">
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.id}
+                className={`flex-1 py-3 text-md text-center font-semibold
+                  ${
+                    index !== 0 && index !== tabs.length
+                      ? "border-l border-gray-600"
+                      : ""
+                  } ${
                       activeTab === tab.id
-                        ? "bg-white text-gray-600"
-                        : "bg-gray-600 text-white hover:bg-[#004c91]"
+                        ? "bg-gray-600 !text-white"
+                        : "!bg-white text-gray-600"
                     } ${index === 0 ? "rounded-l-3xl" : ""} ${
-                    index === tabs.length - 1 ? "rounded-r-3xl" : ""
-                  }`}
-                  onClick={() => setActiveTab(tab.id)}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+                  index === tabs.length - 1 ? "rounded-r-3xl" : ""
+                }`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-wrap">
+        <div className="w-full xl:w-12/12 mb-12 xl:mb-0 px-4 ">
+          <div className="relative flex">
             <TabContent activeTab={activeTab} />
           </div>
         </div>

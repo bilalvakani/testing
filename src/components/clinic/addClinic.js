@@ -1,97 +1,56 @@
+import { clinicFields } from "@/utils/formField/clinicFIelds";
+import { addClinicSchema } from "@/utils/schema";
 import React from "react";
+import TextInput from "../formInput/textInput";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-const AddClinic = ({showForm,setShowForm}) => {
+const AddClinic = ({ showForm, setShowForm }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(addClinicSchema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <>
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-white">Doctor Management</h1>
+      <div className="flex justify-between items-center mt-10">
+        <h1 className="text-2xl font-bold text-neutral-800">
+          Clinic Management
+        </h1>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 bg-gray-600 text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
+          className="px-4 py-2 bg-gray-800 text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
         >
-          {showForm ? "Cancel" : "Add Doctor"}
+          {showForm ? "Cancel" : "Add Clinic"}
         </button>
       </div>
       {showForm && (
         <div className="w-full border rounded-lg shadow-sm p-6 bg-white">
-          <form className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Doctor Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  value={newDoctor.name}
-                  onChange={handleInputChange}
-                  placeholder="Enter doctor name"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <label
-                  htmlFor="specialization"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Specialization
-                </label>
-                <input
-                  id="specialization"
-                  name="specialization"
-                  value={newDoctor.specialization}
-                  onChange={handleInputChange}
-                  placeholder="Enter specialization"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <label
-                  htmlFor="contact"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Contact Number
-                </label>
-                <input
-                  id="contact"
-                  name="contact"
-                  value={newDoctor.contact}
-                  onChange={handleInputChange}
-                  placeholder="Enter contact number"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={newDoctor.email}
-                  onChange={handleInputChange}
-                  placeholder="Enter email address"
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </div>
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            {clinicFields.map((field, index) => (
+              <TextInput
+                key={index}
+                label={field.label}
+                input={field.input}
+                type={field.type}
+                name={field.name}
+                register={register}
+                errors={errors}
+              />
+            ))}
             <div className="flex justify-end">
               <button
                 type="submit"
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
               >
-                Save Doctor
+                Save Clinic
               </button>
             </div>
           </form>
