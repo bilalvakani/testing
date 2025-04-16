@@ -13,20 +13,21 @@ export const SelectInput = ({ placeholder, register, data, loading }) => {
         // onChange={handleChange}
       >
         {loading ? (
-          <Option key="loading" value="loading">
-            <Spinner />
-          </Option>
-        ) : (
-          data?.map(
-            (item) =>
-              item?.id != null &&
-              item?.name != null && (
-                <Option key={item.id} value={item.name}>
-                  {item.name}
-                </Option>
-              )
-          )
-        )}
+  <Option key="loading" value="loading">
+    <Spinner  size={16}  />
+  </Option>
+) : (
+  data?.map(
+    (item) =>
+      item?.id != null &&
+      item?.name != null && (
+        <Option key={item.id} value={item.name}>
+          {item.name}
+        </Option>
+      )
+  )
+)}
+
       </Select>
     </div>
   );
