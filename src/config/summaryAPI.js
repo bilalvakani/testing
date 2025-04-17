@@ -43,6 +43,16 @@ export const summary = {
       data.clinics.map((item, index) => ({
         id: item.id || index + 1,
         name: item.name,
+        address: item.address,
+        LatLong: item.LatLong,
       })),
+  },
+  getQualification: {
+    url: "/getAllQualification",
+    method: "get",
+  },
+  getSpecialization: {
+    url: "/getAllSpecialization",
+    method: "get",
   },
 };

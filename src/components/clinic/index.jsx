@@ -9,6 +9,8 @@ import { Dialog } from "@headlessui/react";
 import { clinicColumns, clinicData } from "../table/tableColumn";
 import TableList from "../table/doctorTable";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import useFetchData from "../table/fetchData";
+import { summary } from "@/config/summaryAPI";
 
 export default function Clinic() {
   const [showForm, setShowForm] = useState(false);
@@ -23,8 +25,10 @@ export default function Clinic() {
     resolver: zodResolver(),
   });
 
+  const api = { ...summary.getClinics };
+  const { data, loading, error } = useFetchData(api);
   const onLocationClick = (latlong) => {
-    console.log("Under aya ya nahii");
+    console.log(latlong);
     const [lat, long] = latlong.split(", ");
     setSelectedLocation({ lat, long });
     setIsMapVisible(true);
@@ -46,7 +50,7 @@ export default function Clinic() {
         placeholder="Search Clinics..."
         onSearch={(value) => console.log("Searching for:", value)}
       />
-      <TableList columns={clinicColumns(onLocationClick)} data={clinicData} />
+      <TableList columns={clinicColumns(onLocationClick)} data={data} loading={loading}/>
       {selectedLocation && <Dialog open={isMapVisible} onClose={() => {}} className="relative z-50">
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center">

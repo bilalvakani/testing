@@ -1,5 +1,7 @@
-import React from "react";
-
+"use-client";
+import React, { useMemo } from "react";
+import { Input, Select } from "antd";
+import Spinner from "../spinner/spinner";
 const TextInput = ({ label, input, type, register, errors, name }) => {
   return (
     <div className="relative w-full mb-3">
@@ -16,12 +18,93 @@ const TextInput = ({ label, input, type, register, errors, name }) => {
         {...register(name, { required: true })}
       />
       {errors[name] && (
-        <span className="text-red-500 text-sm">
-          {errors[name]?.message}
-        </span>
+        <span className="text-red-500 text-sm">{errors[name]?.message}</span>
       )}
     </div>
   );
 };
 
-export default TextInput;
+const TextInputs = ({ label, input, type, register, errors, name }) => {
+  return (
+    <div className="relative w-full mb-3">
+      <label
+        className="block uppercase text-xs font-bold mb-2 text-neutral-800"
+        htmlFor="grid-password"
+      >
+        {label}
+      </label>
+        <Input type={type} placeholder={input} className="h-[40px]" />
+      {/* {errors[name] && (
+        <span className="text-red-500 text-sm">
+          {errors[name]?.message}
+        </span>
+      )} */}
+    </div>
+  );
+};
+
+const SelectInputs = ({ label, input, type, register, errors, name, options }) => {
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+  return (
+    <div className="relative w-full mb-3">
+      <label
+        className="block uppercase text-xs font-bold mb-2 text-neutral-800"
+        htmlFor="grid-password"
+      >
+        {label}
+      </label>
+      <Select
+        onChange={handleChange}
+        options={options}
+        className="!h-[40px] w-full"
+        placeholder={input}
+      />
+      {/* {errors[name] && (
+        <span className="text-red-500 text-sm">
+          {errors[name]?.message}
+        </span>
+      )} */}
+    </div>
+  );
+};
+
+const DataSelectInputs = ({ label, input, type, register, errors, name, options,loading }) => {
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+  console.log(options)
+  const option = useMemo(() => {
+    return options?.map((item) => ({
+      value: item.id,
+      label: item.name,
+    }))
+  }, [options])
+
+  return (
+    <div className="relative w-full mb-3">
+      <label
+        className="block uppercase text-xs font-bold mb-2 text-neutral-800"
+        htmlFor="grid-password"
+      >
+        {label}
+      </label>
+      <Select
+        mode="tags"
+        onChange={handleChange}
+        options={option}
+        className="!h-[40px] w-full"
+        placeholder={input}
+        notFoundContent={loading ? <Spinner/> : "No data found"}
+      />
+      {/* {errors[name] && (
+        <span className="text-red-500 text-sm">
+          {errors[name]?.message}
+        </span>
+      )} */}
+    </div>
+  );
+};
+
+export { TextInput, TextInputs,SelectInputs,DataSelectInputs };
