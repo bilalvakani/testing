@@ -1,4 +1,6 @@
-import { Button } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Button, Space } from "antd";
+
 export const doctorColumns = [
   {
     title: "ID",
@@ -59,7 +61,6 @@ export const patientColumns = (onLocationClick) => [
   },
 ];
 
-
 export const clinicColumns = (onLocationClick) => [
   {
     title: "ID",
@@ -84,6 +85,109 @@ export const clinicColumns = (onLocationClick) => [
     ),
   },
 ];
+export const appointmentColumns = (onLocationClick) => [
+  {
+    title: "ID",
+    dataIndex: "id",
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    sorter: (a, b) => a.age - b.age,
+  },
+  {
+    title: "Blood Pressure",
+    dataIndex: "bloodPressure",
+  },
+  {
+    title: "charges",
+    dataIndex: "charges",
+  },
+  {
+    title: "DIAGNOSIS",
+    dataIndex: "diagnosis",
+  },
+  {
+    title: "PRESCRIPTION",
+    dataIndex: "prescription",
+  },
+  {
+    title: "VISIT_DATE",
+    dataIndex: "visitDate",
+  },
+  {
+    title: "weight",
+    dataIndex: "weight",
+  },
+];
+export const qualificationColumns = (onLocationClick, onEditClick, onDeleteClick) => [
+  {
+    title: "ID",
+    dataIndex: "id",
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
+  },
+  {
+    title: "UPDATE_DATE",
+    dataIndex: "updateDate",
+  },
+
+  {
+    title: "Actions",
+    dataIndex: "e",
+    render: (_, record) => (
+      <Space>
+        <Button
+          icon={<EditOutlined />}
+          onClick={() => onEditClick(record)}
+        />
+        <Button
+          icon={<DeleteOutlined />}
+          danger
+          onClick={() => onDeleteClick(record)}
+        />
+      </Space>
+    ),
+  },
+];
+
+export const specializationColumns = (onLocationClick, onEditClick, onDeleteClick) => [
+  {
+    title: "ID",
+    dataIndex: "id",
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
+  },
+  {
+    title: "UPDATE_DATE",
+    dataIndex: "updateDate",
+  },
+
+  {
+    title: "Actions",
+    dataIndex: "e",
+    render: (_, record) => (
+      <Space>
+        <Button
+          icon={<EditOutlined />}
+          onClick={() => onEditClick(record)}
+        />
+        <Button
+          icon={<DeleteOutlined />}
+          danger
+          onClick={() => onDeleteClick(record)}
+        />
+      </Space>
+    ),
+  },
+];
+
 
 export const patientColumn = [
   {
@@ -270,4 +374,90 @@ export const patientData = [
     contact: "03192094098",
 
   },
+];
+
+export const appointmentData = [
+  {
+    id: 1,
+    age: "15",
+    bloodPressure: "180/160",
+    charges: "Male",
+    diagnosis: "Fever",
+    prescription: "Paracetamol",
+    VISIT_DATE: "2023-10-01",
+    weight: "70",
+
+
+  },
+  {
+    id: 2,
+    age: "11",
+    bloodPressure: "120/160",
+    charges: "3000",
+    diagnosis: "Fever",
+    prescription: "Paracetamol",
+    VISIT_DATE: "2023-10-01",
+    weight: "70",
+
+
+
+  },
+  {
+    id: 3,
+    age: "22",
+    bloodPressure: "180/110",
+    charges: "3000",
+    diagnosis: "Fever",
+    prescription: "Paracetamol",
+    VISIT_DATE: "2023-10-01",
+    weight: "70",
+
+  },
+  {
+    id: 4,
+    age: "20",
+    bloodPressure: "180/120",
+    charges: "2000",
+    diagnosis: "Fever",
+    prescription: "Paracetamol",
+    VISIT_DATE: "2023-10-01",
+    weight: "70",
+  },
+];
+
+export const qualificationData = [
+  {
+    id: 1,
+    name:  "MBBS",
+    updateDate: "2023-10-01",
+    edit: "Edit",
+    delete: "Delete",
+  },
+  {
+    id: 2,
+    name:  "MBBS",
+    updateDate: "2023-10-01",
+    edit: "Edit",
+    delete: "Delete",
+    },
+
+
+];
+export const specializationData = [
+  {
+    id: 1,
+    name:  "Dentist",
+    updateDate: "2023-10-01",
+    edit: "Edit",
+    delete: "Delete",
+  },
+  {
+    id: 2,
+    name:  "Physician",
+    updateDate: "2023-10-01",
+    edit: "Edit",
+    delete: "Delete",
+    },
+
+
 ];
