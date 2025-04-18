@@ -10,8 +10,13 @@ const TableList = ({ columns, data, loading, error }) => {
   };
 
   const CustomEmpty = () => (
-    <div className="py-8">
-      <Spinner size="120"/>
+    <div style={{
+      height: "200px", 
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+   }}>
+      <Spinner size={74} />
     </div>
   );
   return (

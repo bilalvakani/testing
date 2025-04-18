@@ -42,3 +42,18 @@ export const addDoctorSchema = z.object({
     .string()
     .min(1, "Qualification is required"),
 });
+
+export const addPatientSchema = z.object({
+  patientName: z
+    .string()
+    .min(1, "Doctor Name is required"),
+    dob: z
+    .string()
+    .min(1, "Age is required"),
+  gender: z
+    .string()
+    .min(1, "Gender is required"),
+  contactNumber: z
+    .string()
+    .min(1, "Contact Number is required"),
+});

@@ -67,3 +67,36 @@ export const doctorFields = [
     name: "qualification",
   },
 ];
+ 
+export const PatientFields = [
+  {
+    label: "Patient Name",
+    input: "Enter Patient Name",
+    type: "text",
+    name: "patientName",
+  },
+  {
+    label: "DOB",
+    input: "Enter your date of birth",
+    type: "date",
+    name: "dob",
+  },
+  {
+    type: "select",
+    name: "gender", 
+    placeholder: "Enter your Gender",
+    require: true,
+    options: [
+      { label: "Male", value: "male" },
+      { label: "Female", value: "female" },
+    ],
+  },
+ 
+  {
+    label: "Contact Number",
+    input: "Enter Contact Number",
+    type: "text",
+    name: "contactNumber",
+  },
+];
+ 
