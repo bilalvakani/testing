@@ -1,19 +1,19 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { Trash2, Pencil } from "lucide-react";
 import Pagination from "../pagination";
 import SearchInput from "../formInput/searchInput";
 import { SelectInput } from "../formInput/selectInput";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchField } from "@/utils/formField/searchField";
 import TabHeader from "../headers/tabHeader";
 import { Select, Input } from "antd";
 import { doctorColumns, doctorData } from "../table/tableColumn";
 import TableList from "../table/doctorTable";
-import { summary } from "@/config/summaryAPI";
+import { Axios, summary } from "@/config/summaryAPI";
 import useFetchData from "../table/fetchData";
 // Sample doctor data
 const initialDoctors = [
@@ -85,7 +85,6 @@ const initialDoctors = [
 
 export default function Doctor() {
   const [showForm, setShowForm] = useState(false);
-  const [doctors, setDoctors] = useState(initialDoctors);
   const [searchTerm, setSearchTerm] = useState("");
   const { Option } = Select;
 
@@ -99,27 +98,15 @@ export default function Doctor() {
   });
 
   // Filter doctors based on search term
-  const filteredDoctors = doctors.filter(
-    (doctor) =>
-      doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      doctor.specialization.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredDoctors = doctors.filter(
+  //   (doctor) =>
+  //     doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     doctor.specialization.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
   const api = { ...summary.getDoctors };
-  const doctorTransformer = (data) => {
-
-    return data.doctors.map((item, index) => ({
-      id: item.id || index + 1,
-      name: item.name,
-      specialization: item.specializations[0].name || "No Specialization",
-      qualification: item.qualifications[0].name,
-      address: item.address,
-      gender: item.gender,
-      clinic: item.doctorClinicDALS[0]?.clinic?.name,
-      age: item.age,
-    }));
-  };
-  const { data, loading, error } = useFetchData(api,doctorTransformer);
-  console.log(data, loading, error);
+  const clinicApi = { ...summary.getClinics };
+  const { data, loading, error } = useFetchData(api);
+  const { data:clinicData, loading:clinicLoading, error:clinicError } = useFetchData(clinicApi);
   return (
     <div className="container mx-auto py-4 space-y-3">
       <TabHeader
@@ -128,7 +115,7 @@ export default function Doctor() {
         showForm={showForm}
         setShowForm={setShowForm}
       />
-      <SelectInput placeholder="Select Clinic" />
+      <SelectInput placeholder="Select Clinic" data={clinicData} loading={clinicLoading}/>
       <SearchInput
         placeholder="Search Doctors..."
         onSearch={(value) => console.log("Searching for:", value)}

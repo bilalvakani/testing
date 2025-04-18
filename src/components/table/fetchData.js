@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Axios } from "@/config/summaryAPI";
 
-const useFetchData = (apiUrl,doctorTransformer=(data)=>data) => {
-  const { url, method } = apiUrl;
+const useFetchData = (apiUrl) => {
+  const { url, method,transformer = (data) => data } = apiUrl;
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ const useFetchData = (apiUrl,doctorTransformer=(data)=>data) => {
             token:"174462978804907-04-2025-17-48-11"
           }
         });
-        const transformed = doctorTransformer(response.data.data)
+        const transformed = transformer(response.data.data)
         setData(transformed);
       } catch (err) {
         setError(err);

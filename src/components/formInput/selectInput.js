@@ -1,6 +1,8 @@
 import { Select } from "antd";
+import Spinner from "../spinner/spinner";
 
-export const SelectInput = ({ placeholder, register }) => {
+export const SelectInput = ({ placeholder, register, data, loading }) => {
+  console.log(data, "data");
   const { Option } = Select;
   return (
     <div>
@@ -10,9 +12,21 @@ export const SelectInput = ({ placeholder, register }) => {
         allowClear={true}
         // onChange={handleChange}
       >
-        <Option value="apple">Apple</Option>
-        <Option value="banana">Banana</Option>
-        <Option value="mango">Mango</Option>
+        {loading ? (
+          <Option key="loading" value="loading">
+            <Spinner />
+          </Option>
+        ) : (
+          data?.map(
+            (item) =>
+              item?.id != null &&
+              item?.name != null && (
+                <Option key={item.id} value={item.name}>
+                  {item.name}
+                </Option>
+              )
+          )
+        )}
       </Select>
     </div>
   );
