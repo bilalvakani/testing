@@ -34,11 +34,11 @@ const TextInputs = ({ label, input, type, register, errors, name }) => {
         {label}
       </label>
         <Input type={type} placeholder={input} className="h-[40px]" />
-      {/* {errors[name] && (
+      {errors[name] && (
         <span className="text-red-500 text-sm">
           {errors[name]?.message}
         </span>
-      )} */}
+      )}
     </div>
   );
 };
@@ -74,7 +74,6 @@ const DataSelectInputs = ({ label, input, type, register, errors, name, options,
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
-  console.log(options)
   const option = useMemo(() => {
     return options?.map((item) => ({
       value: item.id,

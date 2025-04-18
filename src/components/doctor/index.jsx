@@ -54,13 +54,15 @@ export default function Doctor() {
         buttonText="Add Doctor"
         showForm={showForm}
         setShowForm={setShowForm}
+        data={clinicData}
+        loading={clinicLoading}
         qualificationData={qualification}
         qualificationLoader={qualificationLoader}
         specializationData={specialization}
         specializationLoader={specializationLoader}
       />
 
-      <SelectInput placeholder="Select Clinic" data={clinicData} loading={clinicLoading}/>
+      <SelectInput width="200px" placeholder="Select Clinic" data={clinicData} loading={clinicLoading}/>
       <SearchInput
         placeholder="Search Doctors..."
         onSearch={(value) => console.log("Searching for:", value)}
