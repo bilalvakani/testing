@@ -18,7 +18,7 @@ const useFetchData = (apiUrl,doctorTransformer=(data)=>data) => {
             token:"174462978804907-04-2025-17-48-11"
           }
         });
-        const transformed = doctorTransformer(response.data)
+        const transformed = doctorTransformer(response.data.data)
         setData(transformed);
       } catch (err) {
         setError(err);

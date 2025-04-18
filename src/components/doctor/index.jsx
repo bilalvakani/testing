@@ -106,14 +106,15 @@ export default function Doctor() {
   );
   const api = { ...summary.getDoctors };
   const doctorTransformer = (data) => {
-    return data.map((item, index) => ({
+
+    return data.doctors.map((item, index) => ({
       id: item.id || index + 1,
       name: item.name,
-      specialization: item.specializations,
-      qualification: item.qualifications,
-      address: address,
+      specialization: item.specializations[0].name || "No Specialization",
+      qualification: item.qualifications[0].name,
+      address: item.address,
       gender: item.gender,
-      clinic: item.doctorClinicDALS,
+      clinic: item.doctorClinicDALS[0]?.clinic?.name,
       age: item.age,
     }));
   };
@@ -132,8 +133,7 @@ export default function Doctor() {
         placeholder="Search Doctors..."
         onSearch={(value) => console.log("Searching for:", value)}
       />
-      <TableList columns={doctorColumns} data={data}/>
+      <TableList columns={doctorColumns} data={data} loading={loading} error={error}/>
     </div>
   );
 }
-  

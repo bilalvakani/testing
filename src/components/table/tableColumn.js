@@ -21,8 +21,8 @@ export const doctorColumns = [
     sorter: (a, b) => a.clinic.length - b.clinic.length,
   },
   {
-    title: "Contact",
-    dataIndex: "contact",
+    title: "Address",
+    dataIndex: "address",
   },
   {
     title: "Specialization",
