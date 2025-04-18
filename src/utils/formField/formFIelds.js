@@ -27,26 +27,33 @@ export const doctorFields = [
     name: "doctorName",
   },
   {
+    label: "User Name",
+    input: "Enter User Name",
+    type: "text",
+    name: "userName",
+  },
+  {
+    label: "Password",
+    input: "Enter Doctor Password",
+    type: "password",
+    name: "password",
+  },
+  {
     label: "Age",
     input: "Enter your Age",
     type: "number",
     name: "age",
   },
   {
+    label: "Gender",
     type: "select",
     name: "gender", 
-    placeholder: "Enter your Gender",
+    input: "Select Gender",
     require: true,
     options: [
       { label: "Male", value: "male" },
       { label: "Female", value: "female" },
     ],
-  },
-  {
-    label: "Clinic Name",
-    input: "Enter Clinic Name",
-    type: "text",
-    name: "clinicName",
   },
   {
     label: "Contact Number",
@@ -56,15 +63,25 @@ export const doctorFields = [
   },
   {
     label: "Specialization",
-    input: "Enter Specialization",
-    type: "text",
-    name: "specialization",
+    type: "selectoption",
+    name: "specialization", 
+    input: "Select Specialization",
+    require: true,
+    options: [
+      { label: "Male", value: "male" },
+      { label: "Female", value: "female" },
+    ],
   },
   {
     label: "Qualification",
-    input: "Enter Qualification",
-    type: "text",
-    name: "qualification",
+    type: "selectoption",
+    name: "qualification", 
+    input: "Select Qualification",
+    require: true,
+    options: [
+      { label: "Male", value: "male" },
+      { label: "Female", value: "female" },
+    ],
   },
 ];
  

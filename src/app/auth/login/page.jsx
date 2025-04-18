@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import bgImage from "@/assets/img/bgImage.jpg";
-import TextInput from "@/components/formInput/textInput";
+import {TextInput} from "@/components/formInput/textInput";
 import AuthButton from "@/components/button/authButton";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

@@ -76,9 +76,9 @@ export const clinicColumns = (onLocationClick) => [
   },
   {
     title: "Location",
-    dataIndex: "latlong",
-    render: (latlong) => (
-      <Button className="" onClick={() => onLocationClick(latlong)}>
+    dataIndex: "LatLong",
+    render: (LatLong) => (
+      <Button className="" onClick={() => onLocationClick(LatLong)}>
         View Map
       </Button>
     ),

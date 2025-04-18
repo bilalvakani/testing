@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import Spinner from "../spinner/spinner";
 
-export const SelectInput = ({ placeholder, register, data, loading }) => {
+export const SelectInput = ({ placeholder, register, data, loading,options }) => {
   console.log(data, "data");
   const { Option } = Select;
   return (
