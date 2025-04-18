@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TabHeader from "../headers/tabHeader";
 import { Dialog } from "@headlessui/react";
-import { clinicColumns, clinicData } from "../table/doctorColumn";
+import { clinicColumns, clinicData, patientColumn } from "../table/tableColumn";
 import TableList from "../table/doctorTable";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { SelectInput } from "../formInput/selectInput";
 
-export default function Clinic() {
+export default function Patient() {
   const [showForm, setShowForm] = useState(false);
   const [isMapVisible, setIsMapVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -37,27 +38,20 @@ export default function Clinic() {
   return (
     <div className="container mx-auto py-4 space-y-3">
       <TabHeader
-        title="Clinic Management"
-        buttonText="Add Clinic"
+        title="Patient Management"
+        buttonText="Add Patient"
         showForm={showForm}
         setShowForm={setShowForm}
       />
+      <div className="flex">
+        <SelectInput placeholder="Select Clinic" />
+        <SelectInput placeholder="Select Doctor" />
+      </div>
       <SearchInput
-        placeholder="Search Doctors..."
+        placeholder="Search Patient..."
         onSearch={(value) => console.log("Searching for:", value)}
       />
-      <TableList columns={clinicColumns(onLocationClick)} data={clinicData} />
-      {selectedLocation && <Dialog open={isMapVisible} onClose={() => {}} className="relative z-50">
-        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-        <div className="fixed inset-0 flex items-center justify-center">
-          <Dialog.Panel className="w-full max-w-xl rounded bg-white p-6">
-            <Dialog.Title className="text-lg font-bold">
-              Location Map
-            </Dialog.Title>
-            <p>Your map goes here{selectedLocation?.lat}{selectedLocation?.long}</p>
-          </Dialog.Panel>
-        </div>
-      </Dialog>}
+      <TableList columns={patientColumn} data={clinicData} />
     </div>
   );
 }

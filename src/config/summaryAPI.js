@@ -21,4 +21,8 @@ export const summary = {
     url: "/login",
     method: "get",
   },
+  getDoctors: {
+    url: "/getAllDoctors",
+    method: "get",
+  },
 };

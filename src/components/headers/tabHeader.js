@@ -6,6 +6,7 @@ const TabHeader = ({showForm,setShowForm,title,buttonText}) => {
       <div className="flex justify-between items-center mt-2">
         <h1 className="text-2xl !font-bold text-neutral-800 !mb-0">{title}</h1>
         <button
+        disabled
           onClick={() => setShowForm(!showForm)}
           className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
         >

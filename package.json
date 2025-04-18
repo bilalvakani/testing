@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@headlessui/react": "^2.2.1",
     "@hookform/resolvers": "^5.0.1",
     "@popperjs/core": "^2.11.8",

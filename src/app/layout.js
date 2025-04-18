@@ -1,7 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import "antd/dist/reset.css";
-import '@ant-design/v5-patch-for-react-19';
 import Sidebar from "@/components/sideBar/sidebar";
 import AdminNavbar from "@/components/navbars/adminNavbar";
 // import ProtectedRoute from "@/components/protectedRoute"

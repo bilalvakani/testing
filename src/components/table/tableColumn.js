@@ -63,6 +63,32 @@ export const clinicColumns = (onLocationClick) => [
   },
 ];
 
+export const patientColumn = [
+  {
+    title: "ID",
+    dataIndex: "id",
+  },
+  {
+    title: "Patient Name",
+    dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    sorter: (a, b) => a.age - b.age,
+  },
+  {
+    title: "Gender",
+    dataIndex: "gender",
+    sorter: (a, b) => a.gender.length - b.gender.length,
+  },
+  {
+    title: "Contact",
+    dataIndex: "contact",
+  },
+];
+
 export const doctorData = [
   {
     id: 1,

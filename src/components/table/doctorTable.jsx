@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table, Button, Modal } from "antd";
 import Qualification from "../qualification";
+import { Axios } from "@/config/summaryAPI";
+import { AxiosError } from "@/utils/axiosError";
 
-const TableList = ({columns,data}) => {
-  
+const TableList = ({ columns, data }) => {
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
   };
+  
   return (
     <div>
       <Table
@@ -16,7 +18,7 @@ const TableList = ({columns,data}) => {
         onChange={onChange}
         showSorterTooltip={{ target: "sorter-icon" }}
         pagination={{ pageSize: 5 }}
-        scroll={{ x: 'max-content' }}
+        scroll={{ x: "max-content" }}
       />
     </div>
   );
