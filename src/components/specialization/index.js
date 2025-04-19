@@ -9,6 +9,15 @@ import { Axios, summary } from "@/config/summaryAPI";
 import { fetchSpecialization } from "@/config/callingAPIs";
 
 const Specialization = () => {
+  const [showForm, setShowForm] = useState(true);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(),
+  });
 
   const { specialization, specializationLoader } = fetchSpecialization(
     summary.getSpecialization
@@ -25,6 +34,13 @@ const Specialization = () => {
 
   return (
     <div className="container mx-auto py-4 space-y-3">
+      <TabHeader
+        title="Specialization Management"
+        buttonText="Add Specialization"
+        showForm={showForm}
+        setShowForm={setShowForm}
+
+      />
       <TableList
         columns={specializationColumns(handleEdit, handleDelete)}
         data={specialization}
