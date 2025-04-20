@@ -67,4 +67,8 @@ export const summary = {
     url: "/deleteClinic",
     method: "post",
   },
+  addSpecialization: {
+    url: "/addSpecialization",
+    method: "post",
+  },
 };
