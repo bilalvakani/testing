@@ -48,13 +48,14 @@ const Entities = () => {
   console.log(filterTab)
   return (
     <>
+    w-[45%] sm:w-auto py-3 font-semibold text-center
       <div className="flex flex-wrap">
-        <div className="w-full xl:mb-0 px-4 ">
-          <div className="relative flex flex-wrap w-full">
-            {filterTab.map((tab, index) => (
+        <div className="w-full xl:mb-0 px-4">
+        <div className="relative flex flex-wrap w- sm:w-auto gap-3 ml-4 mt-9 sm:mt-0 sm:gap-0">
+        {filterTab.map((tab, index) => (
               <button
                 key={tab.id}
-                className={`flex-1 py-3 text-md text-center font-semibold
+                className={`sm:flex-1 py-4 shadow-lg font-semibold w-[45%]
                   ${
                     index !== 0 && index !== filterTab.length
                       ? "border-l border-gray-600"
@@ -63,8 +64,8 @@ const Entities = () => {
                       activeTab === tab.id
                         ? "bg-gray-600 !text-white"
                         : "!bg-white text-gray-600"
-                    } ${index === 0 ? "rounded-l-3xl" : ""} ${
-                  index === filterTab.length - 1 ? "rounded-r-3xl" : ""
+                    } ${index === 0 ? "" : ""} ${
+                  index === filterTab.length - 1 ? "" : ""
                 }`}
                 onClick={() => setActiveTab(tab.id)}
               >
@@ -72,6 +73,8 @@ const Entities = () => {
               </button>
             ))}
           </div>
+     
+
         </div>
       </div>
       <div className="flex flex-wrap">
