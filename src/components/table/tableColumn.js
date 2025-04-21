@@ -120,7 +120,7 @@ export const appointmentColumns = (onLocationClick) => [
     dataIndex: "weight",
   },
 ];
-export const qualificationColumns = (onLocationClick, onEditClick, onDeleteClick) => [
+export const qualificationColumns = ( onEditClick, onDeleteClick) => [
   {
     title: "ID",
     dataIndex: "id",
@@ -154,7 +154,7 @@ export const qualificationColumns = (onLocationClick, onEditClick, onDeleteClick
   },
 ];
 
-export const specializationColumns = (onLocationClick, onEditClick, onDeleteClick) => [
+export const specializationColumns = ( onEditClick, onDeleteClick) => [
   {
     title: "ID",
     dataIndex: "id",
