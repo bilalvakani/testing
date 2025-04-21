@@ -2,11 +2,12 @@
 import React, { useMemo } from "react";
 import { Input, Select } from "antd";
 import Spinner from "../spinner/spinner";
+import { Controller } from "react-hook-form";
 const TextInput = ({ label, input, type, register, errors, name }) => {
   return (
     <div className="relative w-full mb-3">
       <label
-        className="block uppercase text-gray-600 text-xs font-bold mb-2 text-neutral-800"
+        className="block uppercase text-gray-600 text-xs font-bold mb-2"
         htmlFor="grid-password"
       >
         {label}
@@ -24,7 +25,15 @@ const TextInput = ({ label, input, type, register, errors, name }) => {
   );
 };
 
-const TextInputs = ({ label, input, type, register, errors, name }) => {
+const TextInputs = ({
+  label,
+  input,
+  type,
+  register,
+  errors,
+  name,
+  control,
+}) => {
   return (
     <div className="relative w-full mb-3">
       <label
@@ -33,17 +42,36 @@ const TextInputs = ({ label, input, type, register, errors, name }) => {
       >
         {label}
       </label>
-        <Input type={type} placeholder={input} className="h-[40px]" />
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: controllerField }) => (
+          <Input
+            type={type}
+            placeholder={input}
+            className="h-[40px]"
+            status={errors[name] ? "error" : ""}
+            value={controllerField.value}
+            onChange={controllerField.onChange}
+          />
+        )}
+      />
       {errors[name] && (
-        <span className="text-red-500 text-sm">
-          {errors[name]?.message}
-        </span>
+        <span className="text-red-500 text-sm">{errors[name]?.message}</span>
       )}
     </div>
   );
 };
 
-const SelectInputs = ({ label, input, type, register, errors, name, options }) => {
+const SelectInputs = ({
+  label,
+  input,
+  type,
+  control,
+  errors,
+  name,
+  options,
+}) => {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -55,22 +83,38 @@ const SelectInputs = ({ label, input, type, register, errors, name, options }) =
       >
         {label}
       </label>
-      <Select
-        onChange={handleChange}
-        options={options}
-        className="!h-[40px] w-full"
-        placeholder={input}
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: controllerField }) => (
+          <Select
+            options={options}
+            className="!h-[40px] w-full"
+            placeholder={input}
+            status={errors[name] ? "error" : ""}
+            value={controllerField.value}
+            onChange={controllerField.onChange}
+          />
+        )}
       />
-      {/* {errors[name] && (
-        <span className="text-red-500 text-sm">
-          {errors[name]?.message}
-        </span>
-      )} */}
+      {errors[name] && (
+        <span className="text-red-500 text-sm">{errors[name]?.message}</span>
+      )}
     </div>
   );
 };
 
-const DataSelectInputs = ({ label, input, type, register, errors, name, options,loading }) => {
+const DataSelectInputs = ({
+  label,
+  input,
+  type,
+  register,
+  errors,
+  name,
+  options,
+  loading,
+  control
+}) => {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
@@ -78,8 +122,8 @@ const DataSelectInputs = ({ label, input, type, register, errors, name, options,
     return options?.map((item) => ({
       value: item.id,
       label: item.name,
-    }))
-  }, [options])
+    }));
+  }, [options]);
 
   return (
     <div className="relative w-full mb-3">
@@ -89,21 +133,31 @@ const DataSelectInputs = ({ label, input, type, register, errors, name, options,
       >
         {label}
       </label>
-      <Select
-        mode="tags"
-        onChange={handleChange}
-        options={option}
-        className="!h-[40px] w-full"
-        placeholder={input}
-        notFoundContent={loading ? <Spinner/> : "No data found"}
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: controllerField }) =>{
+          console.log(controllerField)
+          return(
+            <Select
+            mode="multiple"
+            options={option}
+            className="!h-[40px] w-full"
+            placeholder={input}
+            notFoundContent={loading ? <Spinner /> : "No data found"}
+            status={errors[name] ? "error" : ""}
+            value={Array.isArray(controllerField.value) ? controllerField.value : []}
+            onChange={controllerField.onChange}
+          />
+          )   
+        }
+        }
       />
-      {/* {errors[name] && (
-        <span className="text-red-500 text-sm">
-          {errors[name]?.message}
-        </span>
-      )} */}
+      {errors[name] && (
+        <span className="text-red-500 text-sm">{errors[name]?.message}</span>
+      )}
     </div>
   );
 };
 
-export { TextInput, TextInputs,SelectInputs,DataSelectInputs };
+export { TextInput, TextInputs, SelectInputs, DataSelectInputs };

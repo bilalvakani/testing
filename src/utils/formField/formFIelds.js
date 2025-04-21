@@ -25,6 +25,7 @@ export const doctorFields = [
     input: "Enter Doctor Name",
     type: "text",
     name: "doctorName",
+    require: true,
   },
   {
     label: "User Name",

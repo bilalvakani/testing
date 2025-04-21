@@ -1,5 +1,6 @@
 import { Select } from "antd";
 import Spinner from "../spinner/spinner";
+import { Controller } from "react-hook-form";
 
 export const SelectInput = ({
   placeholder,
@@ -8,6 +9,7 @@ export const SelectInput = ({
   loading,
   options,
   width,
+  errors
 }) => {
   console.log(data, "data");
   const { Option } = Select;
