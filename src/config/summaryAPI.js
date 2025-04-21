@@ -71,4 +71,8 @@ export const summary = {
     url: "/addSpecialization",
     method: "post",
   },
+  addQualification: {
+    url: "/addQualification",
+    method: "post",
+  },
 };
