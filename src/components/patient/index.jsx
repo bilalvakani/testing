@@ -10,6 +10,8 @@ import { clinicColumns, clinicData, patientColumn } from "../table/tableColumn";
 import TableList from "../table/doctorTable";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { SelectInput } from "../formInput/selectInput";
+import { PatientFields } from "@/utils/formField/formFIelds";
+import { addPatientSchema } from "@/utils/schema";
 
 export default function Patient() {
   const [showForm, setShowForm] = useState(false);
@@ -18,22 +20,23 @@ export default function Patient() {
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(),
+    resolver: zodResolver(addPatientSchema),
+    defaultValues: {
+      name: "",
+      age: "",
+      gender: "",
+      contactNumber: "",
+      password:""
+    },
   });
 
-  const onLocationClick = (latlong) => {
-    console.log("Under aya ya nahii");
-    const [lat, long] = latlong.split(", ");
-    setSelectedLocation({ lat, long });
-    setIsMapVisible(true);
-  };
-  const closeMap = () => {
-    // setIsMapVisible(false);
-    // setSelectedLocation(null);
-  };
+  const onSubmit = (data) =>{
+    console.log(data)
+}
 
   return (
     <div className="container mx-auto py-4 space-y-3">
@@ -42,6 +45,11 @@ export default function Patient() {
         buttonText="Add Patient"
         showForm={showForm}
         setShowForm={setShowForm}
+        fields={PatientFields}
+        control={control}
+        errors={errors}
+        onSubmit={onSubmit}
+        handleSubmit={handleSubmit}
       />
       <div className="flex">
         <SelectInput placeholder="Select Clinic" />

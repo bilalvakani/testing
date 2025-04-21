@@ -11,6 +11,8 @@ import TableList from "../table/doctorTable";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import useFetchData from "../table/fetchData";
 import { summary } from "@/config/summaryAPI";
+import { clinicFields } from "@/utils/formField/formFIelds";
+import { addClinicSchema } from "@/utils/schema";
 
 export default function Clinic() {
   const [showForm, setShowForm] = useState(false);
@@ -20,9 +22,16 @@ export default function Clinic() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(),
+    resolver: zodResolver(addClinicSchema),
+    defaultValues: {
+      clinicName: "",
+      address: "",
+      lat: "",
+      lng: "",
+    },
   });
 
   const api = { ...summary.getClinics };
@@ -38,6 +47,14 @@ export default function Clinic() {
     // setSelectedLocation(null);
   };
 
+  const onSubmit = (data) =>{
+      const { lat, lng, ...rest } = data;
+      const payload = {
+        ...rest,
+        LatLong:`${data.lat},${data.lng}`
+      }
+      console.log(payload)
+  }
   return (
     <div className="container mx-auto py-4 space-y-3">
       <TabHeader
@@ -45,6 +62,11 @@ export default function Clinic() {
         buttonText="Add Clinic"
         showForm={showForm}
         setShowForm={setShowForm}
+        fields={clinicFields}
+        control={control}
+        errors={errors}
+        onSubmit={onSubmit}
+        handleSubmit={handleSubmit}
       />
       <SearchInput
         placeholder="Search Clinics..."

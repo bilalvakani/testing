@@ -16,9 +16,11 @@ import TableList from "../table/doctorTable";
 import { Axios, summary } from "@/config/summaryAPI";
 import useFetchData from "../table/fetchData";
 import { fetchQualification, fetchSpecialization } from "@/config/callingAPIs";
+import { doctorFields } from "@/utils/formField/formFIelds";
+import { addDoctorSchema } from "@/utils/schema";
 
 export default function Doctor() {
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { Option } = Select;
 
@@ -26,9 +28,21 @@ export default function Doctor() {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(),
+    resolver: zodResolver(addDoctorSchema),
+    defaultValues: {
+      doctorName: "",
+      userName: "",
+      password: "",
+      age: "",
+      gender: "",
+      contactNumber: "",
+      specialization: "",
+      qualification: "",
+      doctorClinic: [{ clinicName: "", startTime: "", endTime: "" }],
+    },
   });
 
   // Filter doctors based on search term
@@ -47,6 +61,11 @@ export default function Doctor() {
   
   console.log(qualification)
   console.log(specialization)
+
+  const onSubmit = (data) =>{
+    console.log("HelloWorld")
+    console.log(data)
+  }
   return (
     <div className="container mx-auto py-4 space-y-3">
       <TabHeader
@@ -56,10 +75,16 @@ export default function Doctor() {
         setShowForm={setShowForm}
         data={clinicData}
         loading={clinicLoading}
+        fields={doctorFields}
+        control={control}
+        errors={errors}
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
         qualificationData={qualification}
         qualificationLoader={qualificationLoader}
         specializationData={specialization}
         specializationLoader={specializationLoader}
+        
       />
 
       <SelectInput width="200px" placeholder="Select Clinic" data={clinicData} loading={clinicLoading}/>

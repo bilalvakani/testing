@@ -3,19 +3,25 @@ export const clinicFields = [
     label: "Clinic Name",
     input: "Enter Clinic Your",
     type: "text",
-    name: "clinicName",
+    name: "name",
   },
   {
     label: "Address",
     input: "Enter Clinic Address",
     type: "text",
-    name: "clinicAddress",
+    name: "address",
   },
   {
-    label: "Location",
-    input: "Enter Clinic Location",
+    label: "latitude",
+    input: "Enter Location",
     type: "text",
-    name: "cliniclocation",
+    name: "lat",
+  },
+  {
+    label: "longitude",
+    input: "Enter Location",
+    type: "text",
+    name: "lng"
   },
 ];
 
@@ -91,30 +97,36 @@ export const PatientFields = [
     label: "Patient Name",
     input: "Enter Patient Name",
     type: "text",
-    name: "patientName",
+    name: "name",
   },
   {
     label: "DOB",
     input: "Enter your date of birth",
     type: "date",
-    name: "dob",
+    name: "age",
   },
   {
+    label: "Gender",
     type: "select",
     name: "gender", 
-    placeholder: "Enter your Gender",
+    input: "Enter your Gender",
     require: true,
     options: [
       { label: "Male", value: "male" },
       { label: "Female", value: "female" },
     ],
   },
- 
   {
     label: "Contact Number",
     input: "Enter Contact Number",
     type: "text",
     name: "contactNumber",
+  },
+  {
+    label: "Password",
+    input: "Enter your Password",
+    type: "password",
+    name: "password",
   },
 ];
  

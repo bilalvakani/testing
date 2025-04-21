@@ -18,54 +18,33 @@ const TabHeader = ({
   buttonText,
   data,
   loading,
+  fields,
+  handleSubmit,
+  onSubmit,
+  control,
+  errors,
   qualificationData,
   qualificationLoader,
   specializationData,
   specializationLoader,
 }) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    control,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(addDoctorSchema),
-    defaultValues: {
-      doctorName: "",
-      userName: "",
-      password: "",
-      age: "",
-      gender: "",
-      contactNumber: "",
-      specialization: "",
-      qualification: "",
-      doctorClinic: [{ clinicName: "", startTime: "", endTime: "" }],
-    },
-  });
-
-  const onSubmit = async (data) => {
-    console.log("Hello World");
-    console.log(data, "data");
-  };
   return (
     <>
       <div className="flex justify-between items-center mt-2">
         <h1 className="text-2xl !font-bold text-neutral-800 !mb-0">{title}</h1>
         <button
-          disabled
           onClick={() => setShowForm(!showForm)}
           className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
         >
           {showForm ? "Cancel" : buttonText}
         </button>
       </div>
-      <form
+      {showForm && <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-4 border rounded-lg shadow-sm p-4 bg-white"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-          {doctorFields.map((field, index) => {
+          {fields?.map((field, index) => {
             if (field.type === "select") {
               return (
                 <SelectInputs
@@ -141,10 +120,10 @@ const TabHeader = ({
             type="submit"
             className="border px-4 py-2 !mt-2 rounded-2xl bg-neutral-800 !text-white"
           >
-            Add Doctor
+            {buttonText}
           </button>
         </div>
-      </form>
+      </form>}
     </>
   );
 };

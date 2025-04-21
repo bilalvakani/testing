@@ -1,6 +1,7 @@
 import { z } from "zod";
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_\-+=~`[\]{}|\\:;"'<>,.?/]).{6,}$/;
 const time12HrRegex = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i;
+
 export const loginSchema = z.object({
   username: z
     .string()
@@ -9,48 +10,23 @@ export const loginSchema = z.object({
     string().
     min(1, "Password is required"),
 });
+
 export const addClinicSchema = z.object({
-  clinicName: z
+  name: z
     .string()
     .min(1, "Clinic Name is required"),
-  clinicAddress: z.
+  address: z.
     string().
-    min(1, "Clinic Address is required"),
-  clinicLocation: z.
+    min(1, "Address is required"),
+  lat: z.
     string().
-    min(1, "Clinic Location is required"),
+    min(1, "Location is required"),
+  lng: z.
+    string().
+    min(1, "Location is required"),
 });
 
-// export const addDoctorSchema = z.object({
-//   doctorName: z
-//     .string()
-//     .min(1, {message:"Doctor Name is required"}),
-//   userName: z
-//     .string()
-//     .min(1, {message:"User Name is required"}),
-//   // age: z
-//   //   .string()
-//   //   .min(1, "Age is required"),
-//   // gender: z
-//   //   .string()
-//   //   .min(1, "Gender is required"),
-//   // clinicName: z
-//   //   .string()
-//   //   .min(1, "Clinic Name is required"),
-//   // contactNumber: z
-//   //   .string()
-//   //   .min(1, "Contact Number is required"),
-//   // specialization: z
-//   //   .string()
-//   //   .min(1, "Specialization is required"),
-//   // qualification: z
-//   //   .string()
-//   //   .min(1, "Qualification is required"),
-// });
-
-
-export const addDoctorSchema = z.
-  object({
+export const addDoctorSchema = z.object({
     doctorName: z
       .string()
       .min(1, { message: "Doctor Name is required" }),
@@ -61,8 +37,7 @@ export const addDoctorSchema = z.
       .string()
       .min(6, { message: "Password must be at least 6 characters" })
       .regex(passwordRegex, {
-        message:
-          "Password must contain at least one uppercase letter, one lowercase letter, and one symbol",
+        message:"Password must contain at least one uppercase letter, one lowercase letter, and one symbol",
       }),
     age: z
       .string()
@@ -108,11 +83,12 @@ export const addDoctorSchema = z.
       )
     .min(1, { message: "Doctor Clinic is required" }),   
 });
+
 export const addPatientSchema = z.object({
-  patientName: z
+  name: z
     .string()
-    .min(1, "Doctor Name is required"),
-    dob: z
+    .min(1, "Patient Name is required"),
+  age: z
     .string()
     .min(1, "Age is required"),
   gender: z
@@ -121,4 +97,7 @@ export const addPatientSchema = z.object({
   contactNumber: z
     .string()
     .min(1, "Contact Number is required"),
+  password: z
+    .string()
+    .min(1, "Password Number is required"),
 });

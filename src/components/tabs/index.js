@@ -15,23 +15,33 @@ const TabContent = ({ activeTab }) => {
       )
     case "clinic":
       return (
+        <>
         <Clinic/>
+        </>
       )
     case "patient":
       return (
+        <>
         <Patient/>
+        </>
       )
     case "appointment":
       return (
+        <>
         <Appointment/>
+        </>
       )
     case "qualification":
       return (
+        <>
         <Qualification/>
+        </>
       )
     case "specialization":
       return (
+        <>
         <Specialization/>
+        </>
       )
     default:
       return null
