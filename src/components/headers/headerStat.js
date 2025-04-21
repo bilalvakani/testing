@@ -79,8 +79,7 @@ const HeaderStats = () => {
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-4/12 px-2 xl:mb-4">
                 <CardStats
-                  statSubtitle="CLINICS"
-                  statTitle="Total Clinics"
+                  statSubtitle="Total Clinics"
                   statCount={clinicCount?.totalClinics}
                   statIncrement={clinicCount?.totalClinicsThisMonth}
                   statIconName={<HeartPulse />}
@@ -90,8 +89,7 @@ const HeaderStats = () => {
               </div>
               <div className="w-full lg:w-6/12 xl:w-4/12 px-2 xl:mb-4">
                 <CardStats
-                  statSubtitle="DOCTORS"
-                  statTitle="Total Doctors"
+                  statSubtitle="Total Doctors"
                   statCount={doctorCount?.totalDoctors}
                   statIncrement={doctorCount?.totalDoctorsThisMonth}
                   statIconName={<Stethoscope />}
@@ -101,8 +99,7 @@ const HeaderStats = () => {
               </div>
               <div className="w-full lg:w-6/12 xl:w-4/12 px-2 xl:mb-4">
                 <CardStats
-                  statSubtitle="PATIENTS"
-                  statTitle="Total Patients"
+                  statSubtitle="Total Patients"
                   statCount={patientCount?.totalPatient}
                   statIncrement={patientCount?.totalPatientThisMonth}
                   statIconName={<Syringe />}
@@ -112,8 +109,7 @@ const HeaderStats = () => {
               </div>
               <div className="w-full lg:w-6/12 xl:w-4/12 px-2 xl:mb-4">
                 <CardStats
-                  statSubtitle="APPOINTMENT"
-                  statTitle="Total Appointment"
+                  statSubtitle="Total Appointment"
                   statCount={appointmentCount?.totalAppointments}
                   statIncrement={appointmentCount?.totalAppointmentsThisMonth}
                   statIconName={<HeartPulse />}
@@ -123,9 +119,9 @@ const HeaderStats = () => {
               </div>
               <div className="w-full lg:w-6/12 xl:w-4/12 px-2 xl:mb-4">
                 <CardStats
-                  statSubtitle="EARNING"
-                  statTitle="Total Earning"
-                  statCount={earningCount?.totalAppointments}
+                  statSubtitle="Total Earning"
+                  // statCount={earningCount?.totalAppointments}
+                    statCount={3000}
                   statIncrement={earningCount?.totalAppointmentsThisMonth}
                   statPercentColor="text-emerald-500"
                   statDescripiron="Since last month"
