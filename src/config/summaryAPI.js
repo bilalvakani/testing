@@ -67,4 +67,24 @@ export const summary = {
     url: "/deleteClinic",
     method: "post",
   },
+  getSummaryDoctors: {
+    url: "/getSummaryDoctors",
+    method: "get",
+  },
+  getSummaryClinics: {
+    url: "/getSummaryClinics",
+    method: "get",
+  },
+  getSummaryAppointment: {
+    url: "/getSummaryAppointment",
+    method: "get",
+  },
+  getSummaryEarnings: {
+    url: "/getSummaryEarnings",
+    method: "get",
+  },
+  getSummaryPatients: {
+    url: "/getSummaryPatients",
+    method: "get",
+  },
 };

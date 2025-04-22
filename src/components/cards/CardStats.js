@@ -4,12 +4,10 @@ import { ArrowDown,ArrowUp  } from 'lucide-react';
 export default function CardStats({
   statSubtitle,
   statTitle,
-  statArrow,
-  statPercent,
-  statPercentColor,
-  statDescripiron,
+  statIncrement,
   statIconName,
   statIconColor,
+  statCount
 }) {
   return (
     <>
@@ -17,11 +15,12 @@ export default function CardStats({
         <div className="flex-auto p-4">
           <div className="flex flex-wrap">
             <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
-              <h5 className="text-blueGray-400 uppercase font-bold text-xs">
+              <h5 className="text-neutral-900 uppercase !font-bold text-sm">
                 {statSubtitle}
               </h5>
-              <span className="font-semibold text-xl text-blueGray-700">
+              <span className="font-semibold text-sm   text-blueGray-700">
                 {statTitle}
+                {statCount}
               </span>
             </div>
             <div className="relative w-auto pl-4 flex-initial">
@@ -36,15 +35,10 @@ export default function CardStats({
             </div>
           </div>
           <p className="text-sm text-blueGray-400 mt-4 flex">
-            <span className={statPercentColor + " mr-2 flex items-center"}>
-              {statArrow === "up" ? (
-                <ArrowUp className="h-4 w-4" />
-              ) : (
-                <ArrowDown className="h-4 w-4" />
-              )}
-              {statPercent}%
+            <span className={"mr-2 flex items-center"}>
+              {statIncrement}
             </span>
-            <span className="whitespace-nowrap">{statDescripiron}</span>
+            <span className="whitespace-nowrap">Since last month</span>
           </p>
         </div>
       </div>
