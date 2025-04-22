@@ -12,11 +12,16 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { SelectInput } from "../formInput/selectInput";
 import { PatientFields } from "@/utils/formField/formFIelds";
 import { addPatientSchema } from "@/utils/schema";
+import useFetchData from "../table/fetchData";
+import { summary } from "@/config/summaryAPI";
 
 export default function Patient() {
   const [showForm, setShowForm] = useState(false);
-  const [isMapVisible, setIsMapVisible] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const api = { ...summary.getDoctors };
+  const clinicApi = { ...summary.getClinics };
+  const { data, loading, error } = useFetchData(api);
+  const { data:clinicData, loading:clinicLoading, error:clinicError } = useFetchData(clinicApi);
+
   const {
     register,
     handleSubmit,
@@ -51,9 +56,9 @@ export default function Patient() {
         onSubmit={onSubmit}
         handleSubmit={handleSubmit}
       />
-      <div className="flex">
-        <SelectInput placeholder="Select Clinic" />
-        <SelectInput placeholder="Select Doctor" />
+      <div className="flex gap-2">
+        <SelectInput width="200px" placeholder="Select Clinic" data={clinicData} loading={clinicLoading}/>
+        <SelectInput width="200px" placeholder="Select Doctor" data={data} loading={loading}/>
       </div>
       <SearchInput
         placeholder="Search Patient..."

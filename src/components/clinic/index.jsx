@@ -15,7 +15,7 @@ import { clinicFields } from "@/utils/formField/formFIelds";
 import { addClinicSchema } from "@/utils/schema";
 import { AxiosError } from "@/utils/axiosError";
 import toast from "react-hot-toast";
-import { X } from 'lucide-react'; // Make sure to install lucide-react or use any other icon lib
+import { X } from "lucide-react"; // Make sure to install lucide-react or use any other icon lib
 import { DeleteButtonWithText } from "../button/deleteButton";
 import DeleteConformation from "../deleteConformation";
 
@@ -26,11 +26,9 @@ export default function Clinic() {
   const [loader, setLoader] = useState(false);
   const [clinicData, setClinicData] = useState();
   const [isEdited, setIsEdited] = useState(false);
-  const [id,setId] = useState("")
-  const [selectedId, setSelectedId] = useState(null);
+  const [id, setId] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const {
     register,
     handleSubmit,
@@ -63,8 +61,8 @@ export default function Clinic() {
   const handleEdit = async (obj) => {
     setShowForm(true);
     setIsEdited(true);
-    const [lat, lng] = obj?.LatLong.split(",")
-    setId(obj.id)
+    const [lat, lng] = obj?.LatLong.split(",");
+    setId(obj.id);
     reset({
       name: obj.name,
       address: obj.address,
@@ -73,17 +71,16 @@ export default function Clinic() {
     });
   };
   const handleDelete = (id) => {
-    setShowDeleteModal(false);
-    setTimeout(() => {
-      setSelectedId(id);
-      setShowDeleteModal(true);
-    }, 50);
-  };  
+    setModalVisible(true);
+    // setTimeout(() => {
+    //   setId(id);
+    //   setModalVisible(true);
+    // }, 50);
+  };
 
   const confirmDelete = () => {
     console.log("Deleting item with ID:", selectedId);
     // Delete API ya logic yahan
-    setShowDeleteModal(false);
   };
   // const handleDelete = async (id) => {};
 
@@ -140,15 +137,15 @@ export default function Clinic() {
         ...rest,
         LatLong: `${data.lat},${data.lng}`,
       };
-      console.log(payload)
-      console.log(id)
-      return
+      console.log(payload);
+      console.log(id);
+      return;
       const response = await Axios({
         ...summary.updateClinic,
         data: payload,
         params: {
           token: "174435878371907-04-2025-17-48-11",
-          id:id
+          id: id,
         },
       });
       if (response.status == 200) {
@@ -213,15 +210,7 @@ export default function Clinic() {
           </div>
         </Dialog>
       )}
-      
-      {showDeleteModal && (
-        <DeleteConformation
-          onClose={() => setShowDeleteModal(false)}
-          key={selectedId} // 👈 Yeh line add karo
-          onConfirm={confirmDelete}
-        />
-      )}
-
+      <DeleteConformation modalVisible={modalVisible} setModalVisible={setModalVisible} confirmDelete={confirmDelete}/>
     </div>
   );
 }

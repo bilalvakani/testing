@@ -1,79 +1,98 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import { qualificationColumns, specializationColumns } from "../table/tableColumn";
+import {
+  qualificationColumns,
+  specializationColumns,
+} from "../table/tableColumn";
 import TableList from "../table/doctorTable";
 import { Axios, summary } from "@/config/summaryAPI";
 import { fetchQualification, fetchSpecialization } from "@/config/callingAPIs";
 import TabHeader from "../headers/tabHeader";
-import { PatientFields, QualificationFields } from "@/utils/formField/formFIelds";
+import {
+  PatientFields,
+  QualificationFields,
+} from "@/utils/formField/formFIelds";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 
 import { addQualificationSchema } from "@/utils/schema";
 import { AxiosError } from "@/utils/axiosError";
+import DeleteConformation from "../deleteConformation";
 
 const qualification = () => {
   const [showForm, setShowForm] = useState(false);
   const [loader, setLoader] = useState(false);
-  
-  
-  const { qualification, qualificationLoader } = fetchQualification(summary.getQualification);
-  console.log(qualification)
+  const [isEdited, setIsEdited] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [id, setId] = useState("");
+
+  const { qualification, qualificationLoader } = fetchQualification(
+    summary.getQualification
+  );
+  console.log(qualification);
   const {
-      register,
-      handleSubmit,
-      control,
-      reset,
-      formState: { errors },
-    } = useForm({
-      resolver: zodResolver(addQualificationSchema),
-      defaultValues: {
-        qualification: "",
-      },
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(addQualificationSchema),
+    defaultValues: {
+      qualification: "",
+    },
+  });
+
+  const handleEdit = async (obj) => {
+    setShowForm(true);
+    setIsEdited(true);
+    console.log(obj)
+    setId(obj.id);
+    reset({
+      qualification: obj.name,
     });
-  
-  const handleEdit = (record) => {
-    console.log("Edit clicked:", record);
   };
 
-  const handleDelete = (record) => {
-    console.log("Delete clicked:", record);
+  const handleDelete = (id) => {
+    setModalVisible(true);
   };
 
-   const onSubmit = async (data) => {
-        try {
-          setLoader(true);
-          const payload = {
-            name: data.qualification, // ✅ matching the backend key
-          };
-  
-          const response = await Axios({
-            ...summary.addQualification,
-            data: payload,
-            params: {
-              token: "174435878371907-04-2025-17-48-11",
-            },
-          });
-          if (response.status == 200) {
-            toast.success("specialization Add Successfully");
-            reset();
-            // setClinicData((prev) => ({
-            //   ...prev,
-            //   ...response,
-            // }));
-          }
-        } catch (error) {
-          console.log(error);
-          AxiosError(error);
-        } finally {
-          setLoader(false);
-        }
+  const confirmDelete = () => {
+    console.log("Deleting item with ID:", selectedId);
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      setLoader(true);
+      const payload = {
+        name: data.qualification
       };
+
+      const response = await Axios({
+        ...summary.addQualification,
+        data: payload,
+        params: {
+          token: "174435878371907-04-2025-17-48-11",
+        },
+      });
+      if (response.status == 200) {
+        toast.success("specialization Add Successfully");
+        reset();
+        // setClinicData((prev) => ({
+        //   ...prev,
+        //   ...response,
+        // }));
+      }
+    } catch (error) {
+      AxiosError(error);
+    } finally {
+      setLoader(false);
+    }
+  };
 
   return (
     <div className="container mx-auto py-4 space-y-3">
-       
       <TabHeader
         title="Qualification Management"
         buttonText="Add Qualification"
@@ -84,11 +103,17 @@ const qualification = () => {
         errors={errors}
         onSubmit={onSubmit}
         handleSubmit={handleSubmit}
+        loader={loader}
+        isEdited={isEdited}
+        setIsEdited={setIsEdited}
+        reset={reset}
       />
       <TableList
         columns={qualificationColumns(handleEdit, handleDelete)}
-        data={qualification} loading={qualificationLoader}
+        data={qualification}
+        loading={qualificationLoader}
       />
+      <DeleteConformation modalVisible={modalVisible} setModalVisible={setModalVisible} confirmDelete={confirmDelete}/>
     </div>
   );
 };

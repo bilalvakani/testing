@@ -154,10 +154,10 @@ export const qualificationColumns = (onEditClick, onDeleteClick) => [
   {
     title: "Actions",
     dataIndex: "e",
-    render: (_, record) => (
+    render: (_,record) => (
       <div className="flex gap-3">
-        <EditButton onClick={() => onEditClick(record)}><Pencil size={18} className="text-yellow-400"/></EditButton>
-        <DeleteButton onClick={() => onDeleteClick(record)}><Trash2 size={18} className="text-red-600"/></DeleteButton>
+        <EditButton onEditClick={onEditClick} obj={record}><Pencil size={18} className="text-yellow-400"/></EditButton>
+        <DeleteButton onDeleteClick={onDeleteClick} obj={record}><Trash2 size={18} className="text-red-600"/></DeleteButton>
       </div>
     ),
   },
@@ -176,10 +176,10 @@ export const specializationColumns = (onEditClick, onDeleteClick) => [
   {
     title: "Actions",
     dataIndex: "e",
-    render: (_, record) => (
+    render: (_,record) => (
       <div className="flex gap-3">
-        <EditButton onClick={() => onEditClick(record)}><Pencil size={18} className="text-yellow-400"/></EditButton>
-        <DeleteButton onClick={() => onDeleteClick(record)}><Trash2 size={18} className="text-red-600"/></DeleteButton>
+        <EditButton onEditClick={onEditClick} obj={record}><Pencil size={18} className="text-yellow-400"/></EditButton>
+        <DeleteButton onDeleteClick={onDeleteClick} obj={record}><Trash2 size={18} className="text-red-600"/></DeleteButton>
       </div>
     ),
   },
@@ -208,99 +208,6 @@ export const patientColumn = [
   {
     title: "Contact",
     dataIndex: "contact",
-  },
-];
-
-export const doctorData = [
-  {
-    id: 1,
-    name: "Dr. Bilal",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "City Hospital",
-    age: "20",
-  },
-  {
-    id: 2,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
-  },
-  {
-    id: 3,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
-  },
-  {
-    id: 4,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
-  },
-  {
-    id: 5,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
-  },
-  {
-    id: 6,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
-  },
-  {
-    id: 7,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
-  },
-  {
-    id: 8,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
-  },
-  {
-    id: 9,
-    name: "Dr. Basit",
-    specialization: "Cardiology",
-    qualification: "MBBS, MD",
-    contact: "03192094098",
-    gender: "Male",
-    clinic: "Patel Hospital",
-    age: "40",
   },
 ];
 

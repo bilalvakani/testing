@@ -2,22 +2,15 @@ import React, { useState } from 'react'
 import { Dialog } from "@headlessui/react";
 import { X } from 'lucide-react';
 
-const DeleteConformation = () => {
-  const [modalVisible, setModalVisible] = useState(false);
+const DeleteConformation = ({modalVisible,setModalVisible,confirmDelete}) => {
 
   const handleClose = () => {
-    setModalVisible(true); // Close the dialog
-  };
-
-  const onDeleteClick = (id) => {
-    // Your delete logic here
-    console.log("Deleting:", id);
-    handleClose(); // Close dialog after delete
+    setModalVisible(false)
   };
   
 
   return (
-    <Dialog open={!modalVisible} onClose={handleClose} className="relative z-50">
+    <Dialog open={modalVisible} onClose={handleClose} className="relative z-50">
       <div className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" aria-hidden="true" />
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <Dialog.Panel className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl transition-all">
@@ -46,7 +39,7 @@ const DeleteConformation = () => {
             </button>
             <button
               className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium !text-white hover:bg-red-700 transition"
-              onClick={() => onDeleteClick(1)} // Pass actual `id` if needed
+              onClick={() => confirmDelete(1)}
             >
               Delete
             </button>
