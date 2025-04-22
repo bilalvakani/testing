@@ -15,7 +15,9 @@ import { clinicFields } from "@/utils/formField/formFIelds";
 import { addClinicSchema } from "@/utils/schema";
 import { AxiosError } from "@/utils/axiosError";
 import toast from "react-hot-toast";
+import { X } from 'lucide-react'; // Make sure to install lucide-react or use any other icon lib
 import { DeleteButtonWithText } from "../button/deleteButton";
+import DeleteConformation from "../deleteConformation";
 
 export default function Clinic() {
   const api = { ...summary.getClinics };
@@ -197,30 +199,15 @@ export default function Clinic() {
           </div>
         </Dialog>
       )}
-      <Dialog open={modalVisible} onClose={() => {}} className="relative z-50">
-        <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-        <div className="fixed inset-0 flex items-center justify-center">
-          <Dialog.Panel className="w-full max-w-xl rounded bg-gray-100 p-6">
-            <Dialog.Title className="text-lg font-bold">
-              Confirmation Delete
-            </Dialog.Title>
-            <div className="flex gap-2">
-              <button
-                className="cursor-pointer border px-3 py-2 rounded-lg"
-                onClick={() => onDeleteClick(id)}
-              >
-                Cancel
-              </button>
-              <button
-                className="cursor-pointer bg-red-600 !text-white px-3 py-2 rounded-lg"
-                onClick={() => onDeleteClick(id)}
-              >
-                Delete
-              </button>
-            </div>
-          </Dialog.Panel>
-        </div>
-      </Dialog>
+      
+      {showDeleteModal && (
+        <DeleteConformation
+          onClose={() => setShowDeleteModal(false)}
+          key={selectedId} // 👈 Yeh line add karo
+          onConfirm={confirmDelete}
+        />
+      )}
+
     </div>
   );
 }
