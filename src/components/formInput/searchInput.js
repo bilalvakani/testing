@@ -9,10 +9,10 @@ const SearchInput = ({
   placeholder,
 }) => {
   return (
-    <div className="">
+    <div className="sm:w-full w-auto">
       <Input
         placeholder={placeholder}
-        prefix={<SearchOutlined size={15} className="mr-2"/>}
+        prefix={<SearchOutlined size={15} className="mr-2 w"/>}
         // onChange={(e) => onSearch(e.target.value)}
         allowClear
       />

@@ -34,8 +34,8 @@ const TabHeader = ({
 }) => {
   return (
     <>
-      <div className="flex justify-between items-center mt-2">
-        <h1 className="text-2xl !font-bold text-neutral-800 !mb-0">{title}</h1>
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center mt-2">
+        <h1 className="text-2xl !font-bold text-neutral-800 !mb-0 ">{title}</h1>
         <button
           onClick={() => {
             setShowForm(!showForm)

@@ -80,7 +80,7 @@ export default function Doctor() {
         reset={reset}
       />
 
-      <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
+      <SelectInput className="w-auto" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
       <SearchInput
         placeholder="Search Doctors..."
         onSearch={(value) => console.log("Searching for:", value)}

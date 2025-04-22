@@ -21,7 +21,7 @@ export const SelectInput = ({
         // onChange={handleChange}
       >
         {loading ? (
-          <Option key="loading" value="loading">
+          <Option ClassName="w-auto" key="loading" value="loading">
             <Spinner size={16} />
           </Option>
         ) : (
@@ -29,7 +29,7 @@ export const SelectInput = ({
             (item) =>
               item?.id != null &&
               item?.name != null && (
-                <Option key={item.id} value={item.name}>
+                <Option ClassName="w-auto" key={item.id} value={item.name}>
                   {item.name}
                 </Option>
               )

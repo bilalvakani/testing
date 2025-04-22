@@ -20,7 +20,7 @@ const TableList = ({ columns, data, loading, error }) => {
     </div>
   );
   return (
-    <div>
+    <div className="w-auto sm:w-full">
       <Table
         columns={columns}
         rowKey="id"
