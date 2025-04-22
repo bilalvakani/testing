@@ -56,7 +56,7 @@ const TabHeader = ({
         >
           {showForm ? "Cancel" : buttonText}
           </button>
-        )}
+        
       </div>
       {showForm && <form
         onSubmit={handleSubmit(isEdited ? editSubmit : onSubmit)}
