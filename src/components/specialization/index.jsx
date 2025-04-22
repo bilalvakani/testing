@@ -13,6 +13,7 @@ import { AxiosError } from "@/utils/axiosError";
 import toast from "react-hot-toast";
 import DeleteConformation from "../deleteConformation";
 import { AppContext } from "@/provider/AppProvider";
+import { useSelector } from "react-redux";
 
 const Specialization = () => {
   const [showForm, setShowForm] = useState(false);
@@ -20,6 +21,7 @@ const Specialization = () => {
   const [isEdited, setIsEdited] = useState(false);
   const [id, setId] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const user = useSelector((state) => state.auth.user);
 
   const {
     register,
@@ -88,6 +90,7 @@ const Specialization = () => {
       <TabHeader
         title="Specialization Management"
         buttonText="Add Specialization"
+        buttonShow={[5]}
         showForm={showForm}
         setShowForm={setShowForm}
         fields={SpecializationFields}
@@ -99,6 +102,7 @@ const Specialization = () => {
         isEdited={isEdited}
         setIsEdited={setIsEdited}
         reset={reset}
+        type={user?.type}
       />
       <TableList
         columns={specializationColumns(handleEdit, handleDelete)}

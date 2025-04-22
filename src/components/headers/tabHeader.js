@@ -17,6 +17,7 @@ const TabHeader = ({
   setShowForm,
   title,
   buttonText,
+  buttonShow,
   data,
   loading,
   fields,
@@ -30,7 +31,8 @@ const TabHeader = ({
   isEdited,
   setIsEdited,
   reset,
-  editSubmit
+  editSubmit,
+  type
 }) => {
   return (
     <>
@@ -50,7 +52,8 @@ const TabHeader = ({
           className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
         >
           {showForm ? "Cancel" : buttonText}
-        </button>
+          </button>
+        )}
       </div>
       {showForm && <form
         onSubmit={handleSubmit(isEdited ? editSubmit : onSubmit)}

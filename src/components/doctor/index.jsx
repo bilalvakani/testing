@@ -19,6 +19,7 @@ import { fetchQualification, fetchSpecialization } from "@/config/callingAPIs";
 import { doctorFields } from "@/utils/formField/formFIelds";
 import { addDoctorSchema } from "@/utils/schema";
 import { AppContext } from "@/provider/AppProvider";
+import { useSelector } from "react-redux";
 
 export default function Doctor() {
   const [showForm, setShowForm] = useState(false);
@@ -26,6 +27,7 @@ export default function Doctor() {
   const [isEdited, setIsEdited] = useState(false);
   const { Option } = Select;
 
+  const user = useSelector((state) => state.auth.user);
   const {
     register,
     handleSubmit,
@@ -64,6 +66,7 @@ export default function Doctor() {
       <TabHeader
         title="Doctor Management"
         buttonText="Add Doctor"
+        buttonShow={[5]}
         showForm={showForm}
         setShowForm={setShowForm}
         data={clinics}
@@ -78,6 +81,7 @@ export default function Doctor() {
         isEdited={isEdited}
         setIsEdited={setIsEdited}
         reset={reset}
+        type={user?.type}
       />
 
       <SelectInput className="w-auto" placeholder="Select Clinic" data={clinics} loading={isLoading}/>

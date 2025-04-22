@@ -215,7 +215,7 @@ export const patientData = [
   {
     id: 1,
     name: "Ahmed raza",
-    DOB: "2015-04-11",
+    age: "30",
     gender: "Male",
     contact: "03192094098",
 
@@ -223,7 +223,7 @@ export const patientData = [
   {
     id: 2,
     name: "Raza",
-    DOB: "2015-04-11",
+    age: "15",
     gender: "Male",
     contact: "03192094098",
 
@@ -231,15 +231,14 @@ export const patientData = [
   {
     id: 3,
     name: "Basit",
-    DOB: "1959-04-11",
+    age: "12",
     gender: "Male",
     contact: "03192094098",
-
   },
   {
     id: 4,
     name: "Khadija",
-    DOB: "1959-04-11",
+    age: "11",
     gender: "Male",
     contact: "03192094098",
   },

@@ -19,6 +19,7 @@ import { X } from "lucide-react"; // Make sure to install lucide-react or use an
 import { DeleteButtonWithText } from "../button/deleteButton";
 import DeleteConformation from "../deleteConformation";
 import { AppContext } from "@/provider/AppProvider";
+import { useSelector } from "react-redux";
 
 export default function Clinic() {
   const [showForm, setShowForm] = useState(false);
@@ -28,6 +29,7 @@ export default function Clinic() {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const {isLoading,clinics} = useContext(AppContext)
+  const user = useSelector((state) => state.auth.user);
   const {
     register,
     handleSubmit,
@@ -164,6 +166,7 @@ export default function Clinic() {
       <TabHeader
         title="Clinic Management"
         buttonText="Add Clinic"
+        buttonShow={[5]}
         showForm={showForm}
         setShowForm={setShowForm}
         fields={clinicFields}
@@ -176,6 +179,7 @@ export default function Clinic() {
         setIsEdited={setIsEdited}
         reset={reset}
         editSubmit={editSubmit}
+        type={user?.type}
       />
       <SearchInput
         placeholder="Search Clinics..."
