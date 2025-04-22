@@ -106,7 +106,7 @@ const SelectInputs = ({
   );
 };
 
-const DataSelectInputs = ({
+const MultipleSelectInputs = ({
   label,
   input,
   type,
@@ -164,4 +164,61 @@ const DataSelectInputs = ({
   );
 };
 
-export { TextInput, TextInputs, SelectInputs, DataSelectInputs };
+const SingleSelectInputs = ({
+  label,
+  input,
+  type,
+  register,
+  errors,
+  name,
+  options,
+  loading,
+  control
+}) => {
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+  const option = useMemo(() => {
+    return options?.map((item) => ({
+      value: item.id,
+      label: item.name,
+    }));
+  }, [options]);
+
+  console.log(option)
+
+  return (
+    <div className="relative w-full mb-3">
+      <label
+        className="block uppercase text-xs font-bold mb-2 text-neutral-800"
+        htmlFor="grid-password"
+      >
+        {label}
+      </label>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: controllerField }) =>{
+          console.log(controllerField)
+          return(
+            <Select
+            options={option}
+            className="!h-[40px] w-full"
+            placeholder={input}
+            notFoundContent={loading ? <Spinner /> : "No data found"}
+            status={errors[name] ? "error" : ""}
+            value={controllerField.value ? controllerField.value : undefined}
+            onChange={controllerField.onChange}
+          />
+          )   
+        }
+        }
+      />
+      {errors[name] && (
+        <span className="text-red-500 text-sm">{errors[name]?.message}</span>
+      )}
+    </div>
+  );
+};
+
+export { TextInput, TextInputs, SelectInputs, MultipleSelectInputs,SingleSelectInputs };

@@ -134,13 +134,13 @@ export const appointmentFields = [
   {
     label: "Patient Name",
     input: "Select Patient Name",
-    type: "selectoption",
+    type: "singleSelect",
     name: "patientId",
   },
   {
     label: "Doctor Name",
     input: "Select Doctor Name",
-    type: "selectoption",
+    type: "singleSelect",
     name: "doctorId",
   },
   {

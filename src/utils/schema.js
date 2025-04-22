@@ -104,13 +104,13 @@ export const addPatientSchema = z.object({
 
 export const addAppointmentSchema = z.object({
   patientId: z
-    .string()
+    .coerce.string()
     .min(1, "Patient Name is required"),
   clinicId: z
-    .string()
+    .coerce.string()
     .min(1, "Clinic Name is required"),
   doctorId: z
-    .string()
+    .coerce.string()
     .min(1, "Doctor Name is required"),
   visitDate: z
     .date({
