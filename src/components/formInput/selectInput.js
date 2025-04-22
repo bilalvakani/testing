@@ -17,8 +17,8 @@ export const SelectInput = ({
     <div>
       <Select
         placeholder={placeholder}
-        className={`${width ? `w-[${width}]` : "w-full"}`}
         allowClear={true}
+        style={{ width: width || '100%' }}
         // onChange={handleChange}
       >
         {loading ? (

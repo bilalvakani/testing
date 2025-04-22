@@ -101,3 +101,33 @@ export const addPatientSchema = z.object({
     .string()
     .min(1, "Password Number is required"),
 });
+
+export const addAppointmentSchema = z.object({
+  patient: z
+    .string()
+    .min(1, "Patient Name is required"),
+  clinic: z
+    .string()
+    .min(1, "Clinic Name is required"),
+  doctor: z
+    .string()
+    .min(1, "Doctor Name is required"),
+  age: z
+    .string()
+    .min(1, "Age is required"),
+  // contactNumber: z
+  //   .string()
+  //   .min(1, "Contact Number is required"),
+});
+
+export const addQualificationSchema = z.object({
+  qualification: z
+    .string()
+    .min(1, "Qualification Name is required"),
+});
+
+export const addSpecializationSchema = z.object({
+  specialization: z
+    .string()
+    .min(1, "Specialization Name is required"),
+});

@@ -1,5 +1,8 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Pencil,Trash2  } from 'lucide-react';
 import { Button, Space } from "antd";
+import {EditButton} from "../button/editButton";
+import {DeleteButton} from "../button/deleteButton";
 
 export const doctorColumns = [
   {
@@ -11,7 +14,7 @@ export const doctorColumns = [
     dataIndex: "name",
     sorter: (a, b) => a.name.length - b.name.length,
   },
- 
+
   {
     title: "Gender",
     dataIndex: "gender",
@@ -61,7 +64,7 @@ export const patientColumns = (onLocationClick) => [
   },
 ];
 
-export const clinicColumns = (onLocationClick) => [
+export const clinicColumns = (onLocationClick,onEditClick,onDeleteClick) => [
   {
     title: "ID",
     dataIndex: "id",
@@ -79,16 +82,31 @@ export const clinicColumns = (onLocationClick) => [
     title: "Location",
     dataIndex: "LatLong",
     render: (LatLong) => (
-      <Button className="" onClick={() => onLocationClick(LatLong)}>
+      <button className="" onClick={() => onLocationClick(LatLong)}>
         View Map
-      </Button>
+      </button>
+    ),
+  },
+  {
+    title: "Actions",
+    dataIndex: "id",
+    render: (id) => (
+      <div className="flex gap-3">
+        <EditButton onEditClick={onEditClick} id={id}><Pencil size={18} className="text-yellow-400"/></EditButton>
+        <DeleteButton onDeleteClick={onDeleteClick} id={id}><Trash2 size={18} className="text-red-600"/></DeleteButton>
+      </div>
     ),
   },
 ];
-export const appointmentColumns = (onLocationClick) => [
+
+export const appointmentColumns = (onEditClick, onDeleteClick) => [
   {
     title: "ID",
     dataIndex: "id",
+  },
+  {
+    title: "Patient",
+    dataIndex: "patient",
   },
   {
     title: "Age",
@@ -96,54 +114,23 @@ export const appointmentColumns = (onLocationClick) => [
     sorter: (a, b) => a.age - b.age,
   },
   {
-    title: "Blood Pressure",
-    dataIndex: "bloodPressure",
-  },
-  {
-    title: "charges",
-    dataIndex: "charges",
-  },
-  {
-    title: "DIAGNOSIS",
-    dataIndex: "diagnosis",
-  },
-  {
-    title: "PRESCRIPTION",
-    dataIndex: "prescription",
-  },
-  {
-    title: "VISIT_DATE",
+    title: "Visit_date",
     dataIndex: "visitDate",
   },
   {
-    title: "weight",
-    dataIndex: "weight",
-  },
-];
-export const qualificationColumns = ( onEditClick, onDeleteClick) => [
-  {
-    title: "ID",
-    dataIndex: "id",
+    title: "Clinic",
+    dataIndex: "clinic",
   },
   {
-    title: "Name",
-    dataIndex: "name",
-    sorter: (a, b) => a.name.length - b.name.length,
+    title: "Doctor",
+    dataIndex: "doctor",
   },
-  {
-    title: "UPDATE_DATE",
-    dataIndex: "updateDate",
-  },
-
   {
     title: "Actions",
     dataIndex: "e",
     render: (_, record) => (
       <Space>
-        <Button
-          icon={<EditOutlined />}
-          onClick={() => onEditClick(record)}
-        />
+        <Button icon={<EditOutlined />} onClick={() => onEditClick(record)} />
         <Button
           icon={<DeleteOutlined />}
           danger
@@ -154,7 +141,7 @@ export const qualificationColumns = ( onEditClick, onDeleteClick) => [
   },
 ];
 
-export const specializationColumns = ( onEditClick, onDeleteClick) => [
+export const qualificationColumns = (onEditClick, onDeleteClick) => [
   {
     title: "ID",
     dataIndex: "id",
@@ -165,29 +152,38 @@ export const specializationColumns = ( onEditClick, onDeleteClick) => [
     sorter: (a, b) => a.name.length - b.name.length,
   },
   {
-    title: "UPDATE_DATE",
-    dataIndex: "updateDate",
-  },
-
-  {
     title: "Actions",
     dataIndex: "e",
     render: (_, record) => (
-      <Space>
-        <Button
-          icon={<EditOutlined />}
-          onClick={() => onEditClick(record)}
-        />
-        <Button
-          icon={<DeleteOutlined />}
-          danger
-          onClick={() => onDeleteClick(record)}
-        />
-      </Space>
+      <div className="flex gap-3">
+        <EditButton onClick={() => onEditClick(record)}><Pencil size={18} className="text-yellow-400"/></EditButton>
+        <DeleteButton onClick={() => onDeleteClick(record)}><Trash2 size={18} className="text-red-600"/></DeleteButton>
+      </div>
     ),
   },
 ];
 
+export const specializationColumns = (onEditClick, onDeleteClick) => [
+  {
+    title: "ID",
+    dataIndex: "id",
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    sorter: (a, b) => a.name.length - b.name.length,
+  },
+  {
+    title: "Actions",
+    dataIndex: "e",
+    render: (_, record) => (
+      <div className="flex gap-3">
+        <EditButton onClick={() => onEditClick(record)}><Pencil size={18} className="text-yellow-400"/></EditButton>
+        <DeleteButton onClick={() => onDeleteClick(record)}><Trash2 size={18} className="text-red-600"/></DeleteButton>
+      </div>
+    ),
+  },
+];
 
 export const patientColumn = [
   {
@@ -348,7 +344,6 @@ export const patientData = [
     DOB: "2015-04-11",
     gender: "Male",
     contact: "03192094098",
-
   },
   {
     id: 2,
@@ -356,7 +351,6 @@ export const patientData = [
     DOB: "2015-04-11",
     gender: "Male",
     contact: "03192094098",
-
   },
   {
     id: 3,
@@ -364,7 +358,6 @@ export const patientData = [
     DOB: "1959-04-11",
     gender: "Male",
     contact: "03192094098",
-
   },
   {
     id: 4,
@@ -372,7 +365,6 @@ export const patientData = [
     DOB: "1959-04-11",
     gender: "Male",
     contact: "03192094098",
-
   },
 ];
 
@@ -380,14 +372,8 @@ export const appointmentData = [
   {
     id: 1,
     age: "15",
-    bloodPressure: "180/160",
+    patient: "Osama",
     charges: "Male",
-    diagnosis: "Fever",
-    prescription: "Paracetamol",
-    VISIT_DATE: "2023-10-01",
-    weight: "70",
-
-
   },
   {
     id: 2,
@@ -398,9 +384,6 @@ export const appointmentData = [
     prescription: "Paracetamol",
     VISIT_DATE: "2023-10-01",
     weight: "70",
-
-
-
   },
   {
     id: 3,
@@ -411,7 +394,6 @@ export const appointmentData = [
     prescription: "Paracetamol",
     VISIT_DATE: "2023-10-01",
     weight: "70",
-
   },
   {
     id: 4,
@@ -428,36 +410,32 @@ export const appointmentData = [
 export const qualificationData = [
   {
     id: 1,
-    name:  "MBBS",
+    name: "MBBS",
     updateDate: "2023-10-01",
     edit: "Edit",
     delete: "Delete",
   },
   {
     id: 2,
-    name:  "MBBS",
+    name: "MBBS",
     updateDate: "2023-10-01",
     edit: "Edit",
     delete: "Delete",
-    },
-
-
+  },
 ];
 export const specializationData = [
   {
     id: 1,
-    name:  "Dentist",
+    name: "Dentist",
     updateDate: "2023-10-01",
     edit: "Edit",
     delete: "Delete",
   },
   {
     id: 2,
-    name:  "Physician",
+    name: "Physician",
     updateDate: "2023-10-01",
     edit: "Edit",
     delete: "Delete",
-    },
-
-
+  },
 ];

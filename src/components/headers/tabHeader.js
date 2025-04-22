@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
 import { addDoctorSchema } from "@/utils/schema";
 import { Input } from "antd";
+import Spinner from "../spinner/spinner";
 
 const TabHeader = ({
   showForm,
@@ -27,6 +28,7 @@ const TabHeader = ({
   qualificationLoader,
   specializationData,
   specializationLoader,
+  loader
 }) => {
   return (
     <>
@@ -118,9 +120,10 @@ const TabHeader = ({
           )}
           <button
             type="submit"
+            disabled={loader}
             className="border px-4 py-2 !mt-2 rounded-2xl bg-neutral-800 !text-white"
           >
-            {buttonText}
+            {loader ? <Spinner size={16} style={{ color: "white" }}/>  : buttonText}
           </button>
         </div>
       </form>}

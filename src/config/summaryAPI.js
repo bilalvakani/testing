@@ -55,4 +55,12 @@ export const summary = {
     url: "/getAllSpecialization",
     method: "get",
   },
+  addClinic: {
+    url: "/addClinics",
+    method: "post",
+  },
+  deleteClinic: {
+    url: "/deleteClinic",
+    method: "post",
+  },
 };

@@ -129,4 +129,55 @@ export const PatientFields = [
     name: "password",
   },
 ];
+
+export const appointmentFields = [
+  {
+    label: "Patient Name",
+    input: "Select Patient Name",
+    type: "select",
+    name: "patient",
+  },
+  {
+    label: "Clinic Name",
+    input: "Select Clinic Name",
+    type: "select",
+    name: "clinic",
+  },
+  {
+    label: "Doctor Name",
+    input: "Select Doctor Name",
+    type: "select",
+    name: "doctor",
+  },
+  {
+    label: "DOB",
+    input: "Enter your date of birth",
+    type: "date",
+    name: "age",
+  },
+  // {
+  //   label: "Contact Number",
+  //   input: "Enter Contact Number",
+  //   type: "text",
+  //   name: "contactNumber",
+  // },
+];
+
+export const QualificationFields = [
+  {
+    label: "Qualification Name",
+    input: "Enter Qualification Name",
+    type: "text",
+    name: "qualification",
+  },
+];
+
+export const SpecializationFields = [
+  {
+    label: "Specialization Name",
+    input: "Enter Specialization Name",
+    type: "text",
+    name: "specialization",
+  },
+];
  
