@@ -27,8 +27,10 @@ export default function Clinic() {
   const [clinicData, setClinicData] = useState();
   const [isEdited, setIsEdited] = useState(false);
   const [id,setId] = useState("")
+  const [selectedId, setSelectedId] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const {
     register,
     handleSubmit,
@@ -70,8 +72,20 @@ export default function Clinic() {
       lng: lng.trim(),
     });
   };
+  const handleDelete = (id) => {
+    setShowDeleteModal(false);
+    setTimeout(() => {
+      setSelectedId(id);
+      setShowDeleteModal(true);
+    }, 50);
+  };  
 
-  const handleDelete = async (id) => {};
+  const confirmDelete = () => {
+    console.log("Deleting item with ID:", selectedId);
+    // Delete API ya logic yahan
+    setShowDeleteModal(false);
+  };
+  // const handleDelete = async (id) => {};
 
   const handleDeleteClinic = async () => {
     try {
