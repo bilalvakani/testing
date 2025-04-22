@@ -9,9 +9,13 @@ import { Axios, summary } from "@/config/summaryAPI";
 import { fetchSpecialization } from "@/config/callingAPIs";
 import { SpecializationFields } from "@/utils/formField/formFIelds";
 import { addSpecializationSchema } from "@/utils/schema";
+import { AxiosError } from "@/utils/axiosError";
+import toast from "react-hot-toast";
 
 const Specialization = () => {
   const [showForm, setShowForm] = useState(true);
+    const [loader, setLoader] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -38,9 +42,38 @@ const Specialization = () => {
     console.log("Delete clicked:", record);
   };
 
-  const onSubmit = (data) =>{
-    console.log(data)
-  }
+  // const onSubmit = (data) =>{
+  //   console.log(data)
+  // }
+    const onSubmit = async (data) => {
+      try {
+        setLoader(true);
+        const payload = {
+          name: data.specialization, // ✅ matching the backend key
+        };
+
+        const response = await Axios({
+          ...summary.addSpecialization,
+          data: payload,
+          params: {
+            token: "174435878371907-04-2025-17-48-11",
+          },
+        });
+        if (response.status == 200) {
+          toast.success("specialization Add Successfully");
+          reset();
+          // setClinicData((prev) => ({
+          //   ...prev,
+          //   ...response,
+          // }));
+        }
+      } catch (error) {
+        console.log(error);
+        AxiosError(error);
+      } finally {
+        setLoader(false);
+      }
+    };
 
   return (
     <div className="container mx-auto py-4 space-y-3">

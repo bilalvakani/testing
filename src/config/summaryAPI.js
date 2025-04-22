@@ -87,4 +87,12 @@ export const summary = {
     url: "/getSummaryPatients",
     method: "get",
   },
+  addSpecialization: {
+    url: "/addSpecialization",
+    method: "post",
+  },
+  addQualification: {
+    url: "/addQualification",
+    method: "post",
+  },
 };
