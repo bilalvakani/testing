@@ -59,6 +59,10 @@ export const summary = {
     url: "/addClinics",
     method: "post",
   },
+  updateClinic: {
+    url: "/updateClinic",
+    method: "post",
+  },
   deleteClinic: {
     url: "/deleteClinic",
     method: "post",

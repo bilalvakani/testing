@@ -23,6 +23,8 @@ export default function Clinic() {
   const [showForm, setShowForm] = useState(false);
   const [loader, setLoader] = useState(false);
   const [clinicData, setClinicData] = useState();
+  const [isEdited, setIsEdited] = useState(false);
+  const [id,setId] = useState("")
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const {
@@ -44,7 +46,7 @@ export default function Clinic() {
     console.log(latlong);
     const [lat, long] = latlong.split(", ");
     setSelectedLocation({ lat, long });
-    setIsMapVisible(true);
+    setModalVisible(true);
   };
   const closeMap = () => {
     // setIsMapVisible(false);
@@ -54,27 +56,36 @@ export default function Clinic() {
     setClinicData(data);
   }, [data]);
 
-  const handleEdit = (record) => {};
-
-  const handleDelete = async (id) => {
-    
+  const handleEdit = async (obj) => {
+    setShowForm(true);
+    setIsEdited(true);
+    const [lat, lng] = obj?.LatLong.split(",")
+    setId(obj.id)
+    reset({
+      name: obj.name,
+      address: obj.address,
+      lat: lat.trim(),
+      lng: lng.trim(),
+    });
   };
 
-  const handleDeleteClinic = async() =>{
+  const handleDelete = async (id) => {};
+
+  const handleDeleteClinic = async () => {
     try {
       const response = await Axios({
         ...summary.deleteClinic,
-        params:{
-          token:"174435878371907-04-2025-17-48-11",
-          id:id
-        }
-      })
-      if(response.status == 200){
+        params: {
+          token: "174435878371907-04-2025-17-48-11",
+          id: id,
+        },
+      });
+      if (response.status == 200) {
       }
     } catch (error) {
-      AxiosError(error)
+      AxiosError(error);
     }
-  }
+  };
   const onSubmit = async (data) => {
     try {
       setLoader(true);
@@ -105,6 +116,40 @@ export default function Clinic() {
       setLoader(false);
     }
   };
+  const editSubmit = async (data) => {
+    try {
+      setLoader(true);
+      const { lat, lng, ...rest } = data;
+      const payload = {
+        ...rest,
+        LatLong: `${data.lat},${data.lng}`,
+      };
+      console.log(payload)
+      console.log(id)
+      return
+      const response = await Axios({
+        ...summary.updateClinic,
+        data: payload,
+        params: {
+          token: "174435878371907-04-2025-17-48-11",
+          id:id
+        },
+      });
+      if (response.status == 200) {
+        toast.success("Clinic Add Successfully");
+        reset();
+        // setClinicData((prev) => ({
+        //   ...prev,
+        //   ...response,
+        // }));
+      }
+    } catch (error) {
+      console.log(error);
+      AxiosError(error);
+    } finally {
+      setLoader(false);
+    }
+  };
   return (
     <div className="container mx-auto py-4 space-y-3">
       <TabHeader
@@ -118,6 +163,10 @@ export default function Clinic() {
         onSubmit={onSubmit}
         handleSubmit={handleSubmit}
         loader={loader}
+        isEdited={isEdited}
+        setIsEdited={setIsEdited}
+        reset={reset}
+        editSubmit={editSubmit}
       />
       <SearchInput
         placeholder="Search Clinics..."
@@ -148,7 +197,7 @@ export default function Clinic() {
           </div>
         </Dialog>
       )}
-      <Dialog open={!modalVisible} onClose={() => {}} className="relative z-50">
+      <Dialog open={modalVisible} onClose={() => {}} className="relative z-50">
         <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center">
           <Dialog.Panel className="w-full max-w-xl rounded bg-gray-100 p-6">
@@ -156,8 +205,18 @@ export default function Clinic() {
               Confirmation Delete
             </Dialog.Title>
             <div className="flex gap-2">
-              <button className="cursor-pointer border px-3 py-2 rounded-lg" onClick={() => onDeleteClick(id)}>Cancel</button>
-              <button className="cursor-pointer bg-red-600 !text-white px-3 py-2 rounded-lg" onClick={() => onDeleteClick(id)}>Delete</button>
+              <button
+                className="cursor-pointer border px-3 py-2 rounded-lg"
+                onClick={() => onDeleteClick(id)}
+              >
+                Cancel
+              </button>
+              <button
+                className="cursor-pointer bg-red-600 !text-white px-3 py-2 rounded-lg"
+                onClick={() => onDeleteClick(id)}
+              >
+                Delete
+              </button>
             </div>
           </Dialog.Panel>
         </div>

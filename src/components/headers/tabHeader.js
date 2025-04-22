@@ -28,21 +28,34 @@ const TabHeader = ({
   qualificationLoader,
   specializationData,
   specializationLoader,
-  loader
+  loader,
+  isEdited,
+  setIsEdited,
+  reset,
+  editSubmit
 }) => {
   return (
     <>
       <div className="flex justify-between items-center mt-2">
         <h1 className="text-2xl !font-bold text-neutral-800 !mb-0">{title}</h1>
         <button
-          onClick={() => setShowForm(!showForm)}
+          onClick={() => {
+            setShowForm(!showForm)
+            setIsEdited(false)
+            reset({
+              name: "",
+              address: "",
+              lat: "",
+              lng: "",
+            });
+          }}
           className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
         >
           {showForm ? "Cancel" : buttonText}
         </button>
       </div>
       {showForm && <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(isEdited ? editSubmit : onSubmit)}
         className="mt-4 border rounded-lg shadow-sm p-4 bg-white"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
@@ -123,7 +136,7 @@ const TabHeader = ({
             disabled={loader}
             className="border px-4 py-2 !mt-2 rounded-2xl bg-neutral-800 !text-white"
           >
-            {loader ? <Spinner size={16} style={{ color: "white" }}/>  : buttonText}
+            {loader ? <Spinner size={16} style={{ color: "white" }}/> : isEdited ? "Update" :buttonText}
           </button>
         </div>
       </form>}

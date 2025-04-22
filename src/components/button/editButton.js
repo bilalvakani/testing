@@ -1,6 +1,6 @@
-const EditButton = ({children,onEditClick,id}) => {
+const EditButton = ({children,onEditClick,obj}) => {
   return (
-    <button className="cursor-pointer" onClick={() => onEditClick(id)}>{children}</button>
+    <button className="cursor-pointer" onClick={() => onEditClick(obj)}>{children}</button>
   )
 }
  

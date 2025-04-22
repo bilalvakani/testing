@@ -89,11 +89,11 @@ export const clinicColumns = (onLocationClick,onEditClick,onDeleteClick) => [
   },
   {
     title: "Actions",
-    dataIndex: "id",
-    render: (id) => (
+    dataIndex: "e",
+    render: (_,record) => (
       <div className="flex gap-3">
-        <EditButton onEditClick={onEditClick} id={id}><Pencil size={18} className="text-yellow-400"/></EditButton>
-        <DeleteButton onDeleteClick={onDeleteClick} id={id}><Trash2 size={18} className="text-red-600"/></DeleteButton>
+        <EditButton onEditClick={onEditClick} obj={record}><Pencil size={18} className="text-yellow-400"/></EditButton>
+        <DeleteButton onDeleteClick={onDeleteClick} obj={record}><Trash2 size={18} className="text-red-600"/></DeleteButton>
       </div>
     ),
   },
