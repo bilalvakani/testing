@@ -42,20 +42,16 @@ const TabHeader = ({
       <div className="flex flex-col sm:flex-row justify-between sm:items-center mt-2">
         <h1 className="text-2xl !font-bold text-neutral-800 !mb-0 ">{title}</h1>
         <button
-          onClick={() => {
-            setShowForm(!showForm)
-            setIsEdited(false)
-            // reset({
-            //   name: "",
-            //   address: "",
-            //   lat: "",
-            //   lng: "",
-            // });
-          }}
-          className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
-        >
-          {showForm ? "Cancel" : buttonText}
-          </button>
+  onClick={() => {
+    setShowForm(!showForm)
+    setIsEdited(false)
+    // reset({...})
+  }}
+  className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
+>
+  {showForm ? "Cancel" : buttonText}
+</button>  {/* <-- Yeh sahi place par close ho raha hai */}
+
         
       </div>
       {showForm && <form
