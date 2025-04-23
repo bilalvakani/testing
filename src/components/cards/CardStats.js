@@ -13,7 +13,7 @@ export default function CardStats({
   const isPositive = parseFloat(statIncrement) >= 0;
 
   return (
-    <div className="relative flex flex-col min-w-0 break-words bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
+    <div className="relative flex flex-col mt-2 min-w-0 break-words bg-white rounded-lg shadow-md p-4 transition-all hover:shadow-lg">
         <h5 className="text-gray-500 uppercase !font-semibold text-xs">
             {statSubtitle}
         </h5>
