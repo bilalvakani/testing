@@ -25,9 +25,7 @@ const TabHeader = ({
   control,
   errors,
   qualificationData,
-  qualificationLoader,
   specializationData,
-  specializationLoader,
   loader,
   isEdited,
   setIsEdited,
@@ -97,13 +95,7 @@ const TabHeader = ({
                       ? specializationData
                       : []
                   }
-                  loading={
-                    isQualification
-                      ? qualificationLoader
-                      : isSpecialization
-                      ? specializationLoader
-                      : false
-                  }
+                  loading={loading}
                 />
               );
             } else {

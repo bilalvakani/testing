@@ -1,17 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import {
-  qualificationColumns,
-  specializationColumns,
-} from "../table/tableColumn";
+import React, { useContext, useState } from "react";
+import {qualificationColumns,specializationColumns} from "../table/tableColumn";
 import TableList from "../table/doctorTable";
 import { Axios, summary } from "@/config/summaryAPI";
 import { fetchQualification, fetchSpecialization } from "@/config/callingAPIs";
 import TabHeader from "../headers/tabHeader";
-import {
-  PatientFields,
-  QualificationFields,
-} from "@/utils/formField/formFIelds";
+import {PatientFields,QualificationFields} from "@/utils/formField/formFIelds";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
@@ -19,6 +13,7 @@ import toast from "react-hot-toast";
 import { addQualificationSchema } from "@/utils/schema";
 import { AxiosError } from "@/utils/axiosError";
 import DeleteConformation from "../deleteConformation";
+import { AppContext } from "@/provider/AppProvider";
 
 const qualification = () => {
   const [showForm, setShowForm] = useState(false);
@@ -27,10 +22,7 @@ const qualification = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState("");
 
-  const { qualification, qualificationLoader } = fetchQualification(
-    summary.getQualification
-  );
-  console.log(qualification);
+  const {isLoading,qualification} = useContext(AppContext)
   const {
     register,
     handleSubmit,
@@ -111,7 +103,7 @@ const qualification = () => {
       <TableList
         columns={qualificationColumns(handleEdit, handleDelete)}
         data={qualification}
-        loading={qualificationLoader}
+        loading={isLoading}
       />
       <DeleteConformation modalVisible={modalVisible} setModalVisible={setModalVisible} confirmDelete={confirmDelete}/>
     </div>

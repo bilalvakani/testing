@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,7 @@ import { addSpecializationSchema } from "@/utils/schema";
 import { AxiosError } from "@/utils/axiosError";
 import toast from "react-hot-toast";
 import DeleteConformation from "../deleteConformation";
+import { AppContext } from "@/provider/AppProvider";
 
 const Specialization = () => {
   const [showForm, setShowForm] = useState(false);
@@ -33,11 +34,8 @@ const Specialization = () => {
     },
   });
 
-  const { specialization, specializationLoader } = fetchSpecialization(
-    summary.getSpecialization
-  );
-  console.log(specialization, "dddd");
-
+  const {isLoading,specialization} = useContext(AppContext)
+  
   const handleEdit = async (obj) => {
     setShowForm(true);
     setIsEdited(true);
@@ -105,7 +103,7 @@ const Specialization = () => {
       <TableList
         columns={specializationColumns(handleEdit, handleDelete)}
         data={specialization}
-        loading={specializationLoader}
+        loading={isLoading}
       />
       <DeleteConformation
         modalVisible={modalVisible}

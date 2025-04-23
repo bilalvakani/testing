@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import SearchInput from "../formInput/searchInput";
 import { useForm } from "react-hook-form";
@@ -18,17 +18,16 @@ import toast from "react-hot-toast";
 import { X } from "lucide-react"; // Make sure to install lucide-react or use any other icon lib
 import { DeleteButtonWithText } from "../button/deleteButton";
 import DeleteConformation from "../deleteConformation";
+import { AppContext } from "@/provider/AppProvider";
 
 export default function Clinic() {
-  const api = { ...summary.getClinics };
-  const { data, loading, error } = useFetchData(api);
   const [showForm, setShowForm] = useState(false);
   const [loader, setLoader] = useState(false);
-  const [clinicData, setClinicData] = useState();
   const [isEdited, setIsEdited] = useState(false);
   const [id, setId] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const {isLoading,clinics} = useContext(AppContext)
   const {
     register,
     handleSubmit,
@@ -54,9 +53,6 @@ export default function Clinic() {
     // setIsMapVisible(false);
     // setSelectedLocation(null);
   };
-  useEffect(() => {
-    setClinicData(data);
-  }, [data]);
 
   const handleEdit = async (obj) => {
     setShowForm(true);
@@ -187,8 +183,8 @@ export default function Clinic() {
       />
       <TableList
         columns={clinicColumns(onLocationClick, handleEdit, handleDelete)}
-        data={clinicData}
-        loading={loading}
+        data={clinics}
+        loading={isLoading}
       />
       {selectedLocation && (
         <Dialog

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { Trash2, Pencil } from "lucide-react";
@@ -18,10 +18,12 @@ import useFetchData from "../table/fetchData";
 import { fetchQualification, fetchSpecialization } from "@/config/callingAPIs";
 import { doctorFields } from "@/utils/formField/formFIelds";
 import { addDoctorSchema } from "@/utils/schema";
+import { AppContext } from "@/provider/AppProvider";
 
 export default function Doctor() {
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isEdited, setIsEdited] = useState(false);
   const { Option } = Select;
 
   const {
@@ -51,16 +53,7 @@ export default function Doctor() {
   //     doctor.name.toLowerCase().includes(searchTerm.toLowerCase())
   //     // doctor.specialization.toLowerCase().includes(searchTerm.toLowerCase())
   // );
-  const api = { ...summary.getDoctors };
-  const clinicApi = { ...summary.getClinics };
-  const { data, loading, error } = useFetchData(api);
-  const { data:clinicData, loading:clinicLoading, error:clinicError } = useFetchData(clinicApi);
-  
-  const { qualification, qualificationLoader } = fetchQualification(summary.getQualification);
-  const { specialization, specializationLoader } = fetchSpecialization(summary.getSpecialization);
-  
-  console.log(qualification)
-  console.log(specialization)
+  const {isLoading,clinics,qualification,specialization,doctors} = useContext(AppContext)
 
   const onSubmit = (data) =>{
     console.log("HelloWorld")
@@ -73,26 +66,26 @@ export default function Doctor() {
         buttonText="Add Doctor"
         showForm={showForm}
         setShowForm={setShowForm}
-        data={clinicData}
-        loading={clinicLoading}
+        data={clinics}
+        loading={isLoading}
         fields={doctorFields}
         control={control}
         errors={errors}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         qualificationData={qualification}
-        qualificationLoader={qualificationLoader}
         specializationData={specialization}
-        specializationLoader={specializationLoader}
-        
+        isEdited={isEdited}
+        setIsEdited={setIsEdited}
+        reset={reset}
       />
 
-      <SelectInput width="200px" placeholder="Select Clinic" data={clinicData} loading={clinicLoading}/>
+      <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
       <SearchInput
         placeholder="Search Doctors..."
         onSearch={(value) => console.log("Searching for:", value)}
       />
-      <TableList columns={doctorColumns} data={data} loading={loading} error={error}/>
+      <TableList columns={doctorColumns} data={doctors} loading={isLoading}/>
     </div>
   );
 }

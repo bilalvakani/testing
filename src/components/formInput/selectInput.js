@@ -11,7 +11,6 @@ export const SelectInput = ({
   width,
   errors
 }) => {
-  console.log(data, "data");
   const { Option } = Select;
   return (
     <div>

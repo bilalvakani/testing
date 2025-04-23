@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import SearchInput from "../formInput/searchInput";
 import { useForm } from "react-hook-form";
@@ -14,14 +14,12 @@ import { PatientFields } from "@/utils/formField/formFIelds";
 import { addPatientSchema } from "@/utils/schema";
 import useFetchData from "../table/fetchData";
 import { summary } from "@/config/summaryAPI";
+import { AppContext } from "@/provider/AppProvider";
 
 export default function Patient() {
   const [showForm, setShowForm] = useState(false);
-  const api = { ...summary.getDoctors };
-  const clinicApi = { ...summary.getClinics };
-  const { data, loading, error } = useFetchData(api);
-  const { data:clinicData, loading:clinicLoading, error:clinicError } = useFetchData(clinicApi);
-
+  const [isEdited, setIsEdited] = useState(false);
+  const {isLoading,clinics,doctors} = useContext(AppContext)
   const {
     register,
     handleSubmit,
@@ -55,16 +53,19 @@ export default function Patient() {
         errors={errors}
         onSubmit={onSubmit}
         handleSubmit={handleSubmit}
+        isEdited={isEdited}
+        setIsEdited={setIsEdited}
+        reset={reset}
       />
       <div className="flex gap-2">
-        <SelectInput width="200px" placeholder="Select Clinic" data={clinicData} loading={clinicLoading}/>
-        <SelectInput width="200px" placeholder="Select Doctor" data={data} loading={loading}/>
+        <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
+        <SelectInput width="200px" placeholder="Select Doctor" data={doctors} loading={isLoading}/>
       </div>
       <SearchInput
         placeholder="Search Patient..."
         onSearch={(value) => console.log("Searching for:", value)}
       />
-      <TableList columns={patientColumn} data={clinicData} />
+      <TableList columns={patientColumn} />
     </div>
   );
 }

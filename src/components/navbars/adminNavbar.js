@@ -2,8 +2,12 @@
 import React from "react";
 import UserDropdown from "../Dropdowns/UserDropdown";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function AdminNavbar({title}) {
+  const pathName = usePathname()
+
+  console.log(pathName.split("/")[2])
   return (
     <>
       {/* Navbar */}

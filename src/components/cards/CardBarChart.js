@@ -1,6 +1,5 @@
-
 'use client';
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Chart,
   BarController,
@@ -12,12 +11,20 @@ import {
   Title,
 } from "chart.js";
 
-// Register necessary components
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title);
 
 export default function CardBarChart() {
-  React.useEffect(() => {
-    let config = {
+  const chartRef = useRef(null);
+  const chartInstanceRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = chartRef.current.getContext("2d");
+
+    if (chartInstanceRef.current) {
+      chartInstanceRef.current.destroy();
+    }
+
+    chartInstanceRef.current = new Chart(ctx, {
       type: "bar",
       data: {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -32,10 +39,10 @@ export default function CardBarChart() {
           },
           {
             label: new Date().getFullYear() - 1,
-            fill: false,
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
             data: [27, 68, 86, 74, 10, 4, 87],
+            fill: false,
             barThickness: 8,
           },
         ],
@@ -55,22 +62,13 @@ export default function CardBarChart() {
             mode: "index",
             intersect: false,
           },
-          title: {
-            display: false,
-            text: "Orders Chart",
-          },
         },
         scales: {
           x: {
+            display: false,
             grid: {
               color: "rgba(33, 37, 41, 0.3)",
               borderDash: [2],
-              zeroLineColor: "rgba(33, 37, 41, 0.3)",
-            },
-            display: false,
-            title: {
-              display: true,
-              text: "Month",
             },
           },
           y: {
@@ -78,37 +76,29 @@ export default function CardBarChart() {
               color: "rgba(33, 37, 41, 0.2)",
               borderDash: [2],
               drawBorder: false,
-              zeroLineColor: "rgba(33, 37, 41, 0.15)",
-            },
-            display: true,
-            title: {
-              display: false,
-              text: "Value",
             },
           },
         },
       },
-    };
+    });
 
-    let ctx = document.getElementById("bar-chart").getContext("2d");
-    new Chart(ctx, config);
+    return () => {
+      if (chartInstanceRef.current) {
+        chartInstanceRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
     <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
       <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
-        <div className="flex flex-wrap items-center">
-          <div className="relative w-full max-w-full flex-grow flex-1">
-            
-            <h2 className="text-blueGray-700 text-xl font-semibold">
-              Total Patients
-            </h2>
-          </div>
-        </div>
+        <h2 className="text-blueGray-700 text-xl font-semibold">
+          Total Patients
+        </h2>
       </div>
       <div className="p-4 flex-auto">
         <div className="relative h-[350px]">
-          <canvas id="bar-chart"></canvas>
+          <canvas ref={chartRef}></canvas>
         </div>
       </div>
     </div>

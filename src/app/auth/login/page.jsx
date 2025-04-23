@@ -1,15 +1,19 @@
-"use client"
+"use client";
 import Link from "next/link";
 import React from "react";
 import bgImage from "@/assets/img/bgImage.jpg";
-import {TextInput} from "@/components/formInput/textInput";
+import { TextInput } from "@/components/formInput/textInput";
 import AuthButton from "@/components/button/authButton";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/utils/schema";
 import { loginFields } from "@/utils/formField/authFields";
 import { Axios, summary } from "@/config/summaryAPI";
 import { AxiosError } from "@/utils/axiosError";
+import { useDispatch } from "react-redux";
+import { login } from "@/redux/auth";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 const Login = () => {
   const {
     register,
@@ -19,27 +23,45 @@ const Login = () => {
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
-
-  const onSubmit = async(data) =>{
-    console.log("Hello World")
+  const dispatch = useDispatch();
+  const router = useRouter()
+  const onSubmit = async (data) => {
+    console.log("Hello World");
     try {
-      const response = await Axios({
-        ...summary.login,
-        params: {
-          username:data.username,
-          password:data.password,
-          UUID:175678932,
-          type:5
-        }
-      })
-      console.log(response.data)
+      // const response = await Axios({
+      //   ...summary.login,
+      //   params: {
+      //     username:data.username,
+      //     password:data.password,
+      //     UUID:175678932,
+      //     type:5
+      //   }
+      // })
+      let payload;
+      if (data.username === "admin") {
+        payload = {
+          username: data.username,
+          password: data.password,
+          UUID: 175678932,
+          type: 5,
+        };
+      }if (data.username === "clinic") {
+        payload = {
+          username: data.username,
+          password: data.password,
+          UUID: 175678932,
+          type: 4,
+        };
+      }
+      dispatch(login(payload));
+      router.push("/dashboard");
     } catch (error) {
-      console.log(error)
-      AxiosError(error)
-    }finally{
+      console.log(error);
+      AxiosError(error);
+    } finally {
       
     }
-  }
+  };
   return (
     <div
       className="container h-screen bg-cover bg-center bg-blend-overlay bg-[#0066a1] flex items-center justify-center"
