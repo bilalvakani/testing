@@ -19,7 +19,7 @@ const Entities = () => {
     { 
       id: "clinic",
       label: "Clinic",
-      type: [4,5]
+      type: [5]
     },
     { 
       id: "patient",

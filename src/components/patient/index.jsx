@@ -15,11 +15,14 @@ import { addPatientSchema } from "@/utils/schema";
 import useFetchData from "../table/fetchData";
 import { summary } from "@/config/summaryAPI";
 import { AppContext } from "@/provider/AppProvider";
+import { useSelector } from "react-redux";
+import { patientData } from "../table/doctorColumn";
 
 export default function Patient() {
   const [showForm, setShowForm] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
   const {isLoading,clinics,doctors} = useContext(AppContext)
+  const user = useSelector((state) => state.auth.user);
   const {
     register,
     handleSubmit,
@@ -46,6 +49,7 @@ export default function Patient() {
       <TabHeader
         title="Patient Management"
         buttonText="Add Patient"
+        buttonShow={[4,5]}
         showForm={showForm}
         setShowForm={setShowForm}
         fields={PatientFields}
@@ -56,6 +60,7 @@ export default function Patient() {
         isEdited={isEdited}
         setIsEdited={setIsEdited}
         reset={reset}
+        type={user?.type}
       />
       <div className="flex gap-2">
         <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
@@ -65,7 +70,7 @@ export default function Patient() {
         placeholder="Search Patient..."
         onSearch={(value) => console.log("Searching for:", value)}
       />
-      <TableList columns={patientColumn} />
+      <TableList columns={patientColumn} data={patientData}/>
     </div>
   );
 }

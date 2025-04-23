@@ -128,15 +128,11 @@ export const appointmentColumns = (onEditClick, onDeleteClick) => [
   {
     title: "Actions",
     dataIndex: "e",
-    render: (_, record) => (
-      <Space>
-        <Button icon={<EditOutlined />} onClick={() => onEditClick(record)} />
-        <Button
-          icon={<DeleteOutlined />}
-          danger
-          onClick={() => onDeleteClick(record)}
-        />
-      </Space>
+    render: (_,record) => (
+      <div className="flex gap-3">
+        <EditButton onEditClick={onEditClick} obj={record}><Pencil size={18} className="text-yellow-400"/></EditButton>
+        <DeleteButton onDeleteClick={onDeleteClick} obj={record}><Trash2 size={18} className="text-red-600"/></DeleteButton>
+      </div>
     ),
   },
 ];

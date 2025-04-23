@@ -5,12 +5,16 @@ import Image from "next/image"
 import profileImage from "@/assets/img/team-1-800x800.jpg"
 import { ChevronDown } from 'lucide-react';
 import { useRouter } from "next/navigation"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "@/redux/auth"
 export default function UserDropdown() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const triggerRef = useRef(null)
   const dropdownRef = useRef(null)
   const popperInstance = useRef(null)
   const router = useRouter()
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch()
   // Handle click outside to close dropdown
   useEffect(() => {
     function handleClickOutside(event) {
@@ -61,16 +65,17 @@ export default function UserDropdown() {
 
   // Menu items
   const menuItems = [
-    { label: "Profile", onClick: () => console.log("Profile clicked") },
-    { label: "Settings", onClick: () => console.log("Settings clicked") },
-    { label: "Log out", onClick: () => router.push('/auth/login'), isDanger: true },
+    { label: "Log out", onClick: () => {
+      dispatch(logout())
+      router.push('/auth/login')
+    }, isDanger: true },
   ]
 
   return (
     <div className="relative">
       <button
         ref={triggerRef}
-        className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300"
+        className="flex items-center gap-2 rounded-full focus:outline-none border-2 border-gray-300"
         onClick={toggleDropdown}
         aria-expanded={dropdownOpen}
         aria-haspopup="true"
@@ -84,7 +89,7 @@ export default function UserDropdown() {
             sizes="40px"
           />
         </div>
-        <ChevronDown/>
+        <ChevronDown color="white"/>
       </button>
       <div
         ref={dropdownRef}
@@ -96,7 +101,7 @@ export default function UserDropdown() {
         aria-labelledby="user-menu-button"
       >
         {/* User name */}
-        <div className="px-4 py-2 text-sm font-medium text-gray-700">Admin12</div>
+        <div className="px-4 py-2 text-[16px] font-medium text-gray-700 capitalize">{user?.username}</div>
 
         {/* Divider */}
         <div className="my-1 h-px bg-gray-200"></div>
@@ -106,7 +111,7 @@ export default function UserDropdown() {
           <React.Fragment key={index}>
             <button
               className={`block w-full px-4 py-2 text-left text-sm ${
-                item.isDanger ? "text-red-500 hover:bg-red-50" : "text-gray-700 hover:bg-gray-100"
+                item.isDanger ? "!text-red-500 hover:bg-red-50" : "text-gray-700 hover:bg-gray-100"
               }`}
               onClick={() => {
                 item.onClick()

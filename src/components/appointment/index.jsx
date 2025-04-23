@@ -1,3 +1,4 @@
+"use client"
 import React, { useContext, useState } from 'react'
 import SearchInput from "../formInput/searchInput";
 import { useForm } from "react-hook-form";
@@ -11,11 +12,13 @@ import useFetchData from '../table/fetchData';
 import { summary } from '@/config/summaryAPI';
 import { SelectInput } from '../formInput/selectInput';
 import { AppContext } from '@/provider/AppProvider';
+import { useSelector } from 'react-redux';
 
 const Appointment = () => {
     const [showForm, setShowForm] = useState(false);
     const [isMapVisible, setIsMapVisible] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const user = useSelector((state) => state.auth.user);
     const {
       register,
       handleSubmit,
@@ -52,6 +55,7 @@ const Appointment = () => {
     <TabHeader
       title="Appointement Management"
       buttonText="Add Appointment"
+      buttonShow={[4]}
       showForm={showForm}
       setShowForm={setShowForm}
       fields={appointmentFields}
@@ -59,6 +63,7 @@ const Appointment = () => {
       errors={errors}
       onSubmit={onSubmit}
       handleSubmit={handleSubmit}
+      type={user?.type}
     />
     <div className='flex gap-2'>
       <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>

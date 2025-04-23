@@ -14,6 +14,7 @@ import { addQualificationSchema } from "@/utils/schema";
 import { AxiosError } from "@/utils/axiosError";
 import DeleteConformation from "../deleteConformation";
 import { AppContext } from "@/provider/AppProvider";
+import { useSelector } from "react-redux";
 
 const qualification = () => {
   const [showForm, setShowForm] = useState(false);
@@ -23,6 +24,7 @@ const qualification = () => {
   const [id, setId] = useState("");
 
   const {isLoading,qualification} = useContext(AppContext)
+  const user = useSelector((state) => state.auth.user);
   const {
     register,
     handleSubmit,
@@ -88,6 +90,7 @@ const qualification = () => {
       <TabHeader
         title="Qualification Management"
         buttonText="Add Qualification"
+        buttonShow={[5]}
         showForm={showForm}
         setShowForm={setShowForm}
         fields={QualificationFields}
@@ -99,6 +102,7 @@ const qualification = () => {
         isEdited={isEdited}
         setIsEdited={setIsEdited}
         reset={reset}
+        type={user?.type}
       />
       <TableList
         columns={qualificationColumns(handleEdit, handleDelete)}
