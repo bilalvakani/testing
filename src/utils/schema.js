@@ -103,21 +103,21 @@ export const addPatientSchema = z.object({
 });
 
 export const addAppointmentSchema = z.object({
-  patient: z
+  patientId: z
     .string()
     .min(1, "Patient Name is required"),
-  clinic: z
+  clinicId: z
     .string()
     .min(1, "Clinic Name is required"),
-  doctor: z
+  doctorId: z
     .string()
     .min(1, "Doctor Name is required"),
-  age: z
-    .string()
-    .min(1, "Age is required"),
-  // contactNumber: z
-  //   .string()
-  //   .min(1, "Contact Number is required"),
+  visitDate: z
+    .date({
+      required_error: "Visit Date is required",
+      invalid_type_error: "Visit Date must be a valid date"
+    })
+    .min(new Date())
 });
 
 export const addQualificationSchema = z.object({

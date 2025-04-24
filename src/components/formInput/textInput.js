@@ -33,6 +33,7 @@ const TextInputs = ({
   errors,
   name,
   control,
+  disabled
 }) => {
   return (
     <div className="relative w-full mb-3">
@@ -53,6 +54,7 @@ const TextInputs = ({
             status={errors[name] ? "error" : ""}
             value={controllerField.value}
             onChange={controllerField.onChange}
+            disabled={disabled}
           />
         )}
       />
@@ -124,6 +126,8 @@ const DataSelectInputs = ({
       label: item.name,
     }));
   }, [options]);
+
+  console.log(option)
 
   return (
     <div className="relative w-full mb-3">

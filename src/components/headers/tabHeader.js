@@ -25,15 +25,18 @@ const TabHeader = ({
   onSubmit,
   control,
   errors,
+  doctorData,
   qualificationData,
   specializationData,
+  patientData,
   loader,
   isEdited,
   setIsEdited,
   reset,
   editSubmit,
-  type
+  type,
 }) => {
+  console.log(patientData)
   return (
     <>
       <div className="flex justify-between items-center mt-2">
@@ -43,12 +46,12 @@ const TabHeader = ({
           onClick={() => {
             setShowForm(!showForm)
             setIsEdited(false)
-            reset({
-              name: "",
-              address: "",
-              lat: "",
-              lng: "",
-            });
+            // reset({
+            //   name: "",
+            //   address: "",
+            //   lat: "",
+            //   lng: "",
+            // });
           }}
           className="px-4 py-2 bg-gray-800 !text-white rounded-3xl hover:bg-[#0066a1] transition-colors border-white border"
         >
@@ -83,6 +86,11 @@ const TabHeader = ({
               const isSpecialization = field.name
                 .toLowerCase()
                 .includes("specialization");
+              const isDoctor = field.name
+                .includes("doctorId");
+              const isPatient = field.name
+                .includes("patientId");
+              console.log(isPatient,"isPatient")
               return (
                 <DataSelectInputs
                   key={index}
@@ -97,6 +105,10 @@ const TabHeader = ({
                       ? qualificationData
                       : isSpecialization
                       ? specializationData
+                      : isDoctor
+                      ? doctorData
+                      : isPatient
+                      ? patientData
                       : []
                   }
                   loading={loading}
@@ -112,6 +124,7 @@ const TabHeader = ({
                   control={control}
                   errors={errors}
                   name={field.name}
+                  disabled={field.disabled || false}
                 />
               );
             }

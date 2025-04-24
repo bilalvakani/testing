@@ -36,12 +36,12 @@ const Specialization = () => {
     },
   });
 
-  const {isLoading,specialization} = useContext(AppContext)
-  
+  const { isLoading, specialization } = useContext(AppContext);
+
   const handleEdit = async (obj) => {
     setShowForm(true);
     setIsEdited(true);
-    console.log(obj)
+    console.log(obj);
     setId(obj.id);
     reset({
       specialization: obj.name,
@@ -85,6 +85,41 @@ const Specialization = () => {
     }
   };
 
+  const editSubmit = async (data) => {
+    try {
+      setLoader(true);
+      const { lat, lng, ...rest } = data;
+      const payload = {
+        ...rest,
+        LatLong: `${data.lat},${data.lng}`,
+      };
+      console.log(payload);
+      console.log(id);
+      return;
+      const response = await Axios({
+        ...summary.updateClinic,
+        data: payload,
+        params: {
+          token: "174435878371907-04-2025-17-48-11",
+          id: id,
+        },
+      });
+      if (response.status == 200) {
+        toast.success("Clinic Add Successfully");
+        reset();
+        // setClinicData((prev) => ({
+        //   ...prev,
+        //   ...response,
+        // }));
+      }
+    } catch (error) {
+      console.log(error);
+      AxiosError(error);
+    } finally {
+      setLoader(false);
+    }
+  };
+
   return (
     <div className="container mx-auto py-4 space-y-3">
       <TabHeader
@@ -102,6 +137,7 @@ const Specialization = () => {
         isEdited={isEdited}
         setIsEdited={setIsEdited}
         reset={reset}
+        editSubmit={editSubmit}
         type={user?.type}
       />
       <TableList

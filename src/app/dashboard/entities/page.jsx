@@ -1,14 +1,22 @@
 "use client";
 import AdminNavbar from "@/components/navbars/adminNavbar";
 import TabContent from "@/components/tabs";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import bgImage from "@/assets/img/bgImage.jpg";
 import CardLineChart from "@/components/cards/CardLineChart";
 import { useSelector } from "react-redux";
+import { AppContext } from "@/provider/AppProvider";
 
 const Entities = () => {
   const [activeTab, setActiveTab] = useState("doctor");
   const user = useSelector((state) => state.auth.user);
+  const { fetchClinicDropdown,fetchQualificationDropdown,fetchQSpecializationDropdown,fetchDoctorDropdown } = useContext(AppContext);
+  useEffect(() => {
+    fetchClinicDropdown()
+    fetchQualificationDropdown()
+    fetchQSpecializationDropdown()
+    fetchDoctorDropdown()
+  }, []);
   console.log(user,"user")
   const tabs = [
     { 

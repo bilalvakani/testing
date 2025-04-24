@@ -12,7 +12,10 @@ import { AxiosError } from "@/utils/axiosError";
 import { Axios, summary } from "@/config/summaryAPI";
 import { AppContext } from "@/provider/AppProvider";
 const HeaderStats = () => {
-  const { doctorSummary,clinicSummary,earningSummary,patientSummary,appointmentSummary, } = useContext(AppContext);
+  const { doctorSummary,clinicSummary,earningSummary,patientSummary,appointmentSummary,fetchAllSummaryData } = useContext(AppContext);
+  useEffect(()=>{
+    fetchAllSummaryData()
+  },[])
   const [loading, setLoading] = useState(true)
 
   const doctorCount = doctorSummary?.data

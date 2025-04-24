@@ -213,7 +213,7 @@ export const clinicData = [
 
 export const patientData = [
   {
-    id: 1,
+    id: 61,
     name: "Ahmed raza",
     age: "30",
     gender: "Male",
@@ -221,7 +221,7 @@ export const patientData = [
 
   },
   {
-    id: 2,
+    id: 63,
     name: "Raza",
     age: "15",
     gender: "Male",
@@ -229,14 +229,14 @@ export const patientData = [
 
   },
   {
-    id: 3,
+    id: 66,
     name: "Basit",
     age: "12",
     gender: "Male",
     contact: "03192094098",
   },
   {
-    id: 4,
+    id: 71,
     name: "Khadija",
     age: "11",
     gender: "Male",

@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SearchInput from "../formInput/searchInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,11 +13,13 @@ import { summary } from '@/config/summaryAPI';
 import { SelectInput } from '../formInput/selectInput';
 import { AppContext } from '@/provider/AppProvider';
 import { useSelector } from 'react-redux';
+import { patientData } from '../table/doctorColumn';
 
 const Appointment = () => {
     const [showForm, setShowForm] = useState(false);
     const [isMapVisible, setIsMapVisible] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const [isEdited, setIsEdited] = useState(false);
     const user = useSelector((state) => state.auth.user);
     const {
       register,
@@ -28,11 +30,10 @@ const Appointment = () => {
     } = useForm({
       resolver: zodResolver(addAppointmentSchema),
       defaultValues: {
-        patient: "",
-        doctor:"",
-        clinic:"",
-        age: "",
-        contactNumber: "",
+        patientId: "",
+        doctorId:"",
+        clinicId:"Patel Hospital",
+        visitDate: "",
       },
     });
     const onSubmit = () => {
@@ -45,24 +46,26 @@ const Appointment = () => {
     const handleDelete = (record) => {
       console.log("Delete clicked:", record);
     };
-    const api = { ...summary.getDoctors };
-    const clinicApi = { ...summary.getClinics };
-    const { data, loading, error } = useFetchData(api);
-    const { data:clinicData, loading:clinicLoading, error:clinicError } = useFetchData(clinicApi);
     const {isLoading,clinics,doctors} = useContext(AppContext)
   return (
     <div className="container mx-auto py-4 space-y-3">
     <TabHeader
       title="Appointement Management"
       buttonText="Add Appointment"
-      buttonShow={[4]}
+      buttonShow={[4,5]}
       showForm={showForm}
       setShowForm={setShowForm}
+      loading={isLoading}
       fields={appointmentFields}
       control={control}
       errors={errors}
       onSubmit={onSubmit}
       handleSubmit={handleSubmit}
+      patientData={patientData}
+      doctorData={doctors}
+      isEdited={isEdited}
+      setIsEdited={setIsEdited}
+      reset={reset}
       type={user?.type}
     />
     <div className='flex gap-2'>

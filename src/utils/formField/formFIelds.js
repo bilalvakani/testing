@@ -134,26 +134,27 @@ export const appointmentFields = [
   {
     label: "Patient Name",
     input: "Select Patient Name",
-    type: "select",
-    name: "patient",
-  },
-  {
-    label: "Clinic Name",
-    input: "Select Clinic Name",
-    type: "select",
-    name: "clinic",
+    type: "selectoption",
+    name: "patientId",
   },
   {
     label: "Doctor Name",
     input: "Select Doctor Name",
-    type: "select",
-    name: "doctor",
+    type: "selectoption",
+    name: "doctorId",
   },
   {
-    label: "DOB",
-    input: "Enter your date of birth",
+    label: "Clinic Name",
+    input: "Enter Clinic Name",
+    type: "text",
+    name: "clinicId",
+    disabled:true
+  },
+  {
+    label: "Visit Date",
+    input: "Enter Visit Date",
     type: "date",
-    name: "age",
+    name: "visitDate",
   },
   // {
   //   label: "Contact Number",

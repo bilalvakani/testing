@@ -55,12 +55,13 @@ export default function Patient() {
         fields={PatientFields}
         control={control}
         errors={errors}
-        onSubmit={onSubmit}
         handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
         isEdited={isEdited}
         setIsEdited={setIsEdited}
         reset={reset}
         type={user?.type}
+        
       />
       <div className="flex gap-2">
         <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>

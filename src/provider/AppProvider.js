@@ -2,11 +2,13 @@
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { Axios, summary } from "@/config/summaryAPI";
 import { AxiosError } from "@/utils/axiosError";
+import { patientData } from "@/components/table/doctorColumn";
 export const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [loadingCount, setLoadingCount] = useState(0);
   const [clinics, setClinics] = useState([]);
   const [doctors, setDoctors] = useState([]);
+  const [patients, setPatients] = useState(patientData);
   const [appointment, setAppointment] = useState([]);
   const [qualification, setQualification] = useState([]);
   const [specialization, setSpecialization] = useState([]);
@@ -131,13 +133,13 @@ const AppProvider = ({ children }) => {
       stopLoading();
     }
   };
-  useEffect(() => {
-    fetchAllSummaryData();
-    fetchClinicDropdown();
-    fetchQualificationDropdown();
-    fetchQSpecializationDropdown();
-    fetchDoctorDropdown();
-  }, []);
+  // useEffect(() => {
+  //   fetchAllSummaryData();
+  //   fetchClinicDropdown();
+  //   fetchQualificationDropdown();
+  //   fetchQSpecializationDropdown();
+  //   fetchDoctorDropdown();
+  // }, []);
   return (
     <AppContext.Provider
       value={{
@@ -146,6 +148,8 @@ const AppProvider = ({ children }) => {
         setClinics,
         doctors,
         setDoctors,
+        patients,
+        setPatients,
         appointment,
         setAppointment,
         qualification,
@@ -157,6 +161,11 @@ const AppProvider = ({ children }) => {
         earningSummary,
         patientSummary,
         appointmentSummary,
+        fetchAllSummaryData,
+        fetchClinicDropdown,
+        fetchQualificationDropdown,
+        fetchQSpecializationDropdown,
+        fetchDoctorDropdown,
       }}
     >
       {children}
