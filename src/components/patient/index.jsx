@@ -63,9 +63,9 @@ export default function Patient() {
         type={user?.type}
         
       />
-      <div className="flex gap-2">
-        <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
-        <SelectInput width="200px" placeholder="Select Doctor" data={doctors} loading={isLoading}/>
+      <div className="sm:flex gap-3 sm:flex-row mt-2 flex flex-col">
+        <SelectInput className="w-full" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
+        <SelectInput className="w-full" placeholder="Select Doctor" data={doctors} loading={isLoading}/>
       </div>
       <SearchInput
         placeholder="Search Patient..."

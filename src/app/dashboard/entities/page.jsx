@@ -59,11 +59,11 @@ const Entities = () => {
     w-[45%] sm:w-auto py-3 font-semibold text-center
       <div className="flex flex-wrap">
         <div className="w-full xl:mb-0 px-4">
-        <div className="relative flex flex-wrap w- sm:w-auto gap-3 ml-4 mt-9 sm:mt-0 sm:gap-0">
+        <div className="relative flex flex-wrap  sm:w-auto gap-3 ml-0  mt-9 sm:mt-0 sm:gap-0">
         {filterTab.map((tab, index) => (
               <button
                 key={tab.id}
-                className={`sm:flex-1 py-4 shadow-lg font-semibold w-[45%]
+                className={`sm:flex-1 py-4 shadow-lg font-semibold w-[47%]
                   ${
                     index !== 0 && index !== filterTab.length
                       ? "border-l border-gray-600"
@@ -86,7 +86,7 @@ const Entities = () => {
         </div>
       </div>
       <div className="flex flex-wrap">
-        <div className="w-full xl:w-12/12 mb-12 xl:mb-0 px-4 ">
+        <div className="w-full xl:w-12/12 mb-12 xl:mb-0 px-5 ">
           <div className="relative flex">
             <TabContent activeTab={activeTab} />
           </div>

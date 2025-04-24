@@ -68,10 +68,10 @@ const Appointment = () => {
       reset={reset}
       type={user?.type}
     />
-    <div className='flex gap-2'>
-      <SelectInput width="200px" placeholder="Select Clinic" data={clinics} loading={isLoading}/>
-      <SelectInput width="200px" placeholder="Select Doctor" data={doctors} loading={isLoading}/>
-      <SelectInput width="200px" placeholder="Select Patient" data={clinics} loading={isLoading}/>
+    <div className='sm:flex gap-3 sm:flex-row mt-2 flex flex-col w-auto'>
+      <SelectInput placeholder="Select Clinic" data={clinics} loading={isLoading}/>
+      <SelectInput placeholder="Select Doctor" data={doctors} loading={isLoading}/>
+      <SelectInput placeholder="Select Patient" data={clinics} loading={isLoading}/>
     </div>
     <SearchInput
       placeholder="Search Appointment..."
